@@ -1,81 +1,48 @@
-import { Parser } from 'sql-ddl-to-json-schema';
-import { promises as fs } from 'fs';
-import path from 'path';
-import util from 'util';
+// import Parser for all databases
+const { Parser } = require('node-sql-parser');
+const fs = require('fs').promises;
+const path = require('path');
+const assert = require('assert');
+const { splitDdl, extractTableObj } = require('./parse_ddl');
+const { generateEntity } = require('./plantuml_table');
 
-const parser = new Parser('mysql');
+const parser = new Parser();
 
 async function main(schemaFilePath, outputDirPath) {
   const sqlStr = await fs.readFile(schemaFilePath, 'utf8');
 
-  /**
-   * Read on for available options.
-   */
-  const options = { useRef: true };
-
-  /**
-   * Feed the parser with the SQL DDL statements...
-   */
-  parser.feed(sqlStr);
-
-  /**
-   * You can get the parsed results in JSON format...
-   */
-  const parsedJsonFormat = parser.results;
-
-  /**
-   * And pass it to be formatted in a compact JSON format...
-   */
-  const compactJsonTablesArray = parser.toCompactJson(parsedJsonFormat);
-
-  /**
-   * Finally pass it to format to an array of JSON Schema items. One for each table...
-   */
-  const jsonSchemaDocuments = parser.toJsonSchemaArray(options, compactJsonTablesArray);
-
-  console.log(util.inspect(jsonSchemaDocuments, { showHidden: false, depth: null, colors: true }));
-
-  const tables = jsonSchemaDocuments.reduce(
-    (previousValue, currentValue) => Object.assign(
-      previousValue,
-      { [currentValue.title]: Object.keys(currentValue.properties) },
-    ),
-    {},
+  const ddls = splitDdl(sqlStr);
+  const entities = ddls.reduce(
+    (acc, cur) => {
+      try {
+        const ast = parser.astify(cur); // mysql sql grammer parsed by default
+        assert(ast.length === 1, 'Parse only one DDL at a time.');
+        const { tableName, columnNames } = extractTableObj(ast[0]);
+        return acc + generateEntity(tableName, columnNames);
+      } catch (err) {
+        console.error(`Can not parse "${cur}"`, err);
+        return acc;
+      }
+    },
+    '',
   );
-  console.log(tables);
+
+  const relations = '';
 
   // https://plantuml.com/ko/ie-diagram
   const pumlStr = `@startuml
 
 ' hide the spot
 hide circle
+hide methods
+hide stereotypes
 
 ' avoid problems with angled crows feet
 skinparam linetype ortho
 
-entity "Entity01" as e01 {
-  *e1_id : number <<generated>>
-  --
-  *name : text
-  description : text
-}
+${entities}
 
-entity "Entity02" as e02 {
-  *e2_id : number <<generated>>
-  --
-  *e1_id : number <<FK>>
-  other_details : text
-}
-
-entity "Entity03" as e03 {
-  *e3_id : number <<generated>>
-  --
-  e1_id : number <<FK>>
-  other_details : text
-}
-
-e01 ||..o{ e02
-e01 |o..o{ e03
+${relations}
 
 @enduml
 `;
@@ -85,7 +52,7 @@ e01 |o..o{ e03
   await fs.writeFile(pumlFilePath, pumlStr, 'utf8');
 }
 
-const schemaFilePath = './sql_samples/sql-ddl-to-json-schema.sql';
+const schemaFilePath = './sql_samples/database_modeling_4.sql';
 const outputDirPath = './output';
 
 main(schemaFilePath, outputDirPath);
