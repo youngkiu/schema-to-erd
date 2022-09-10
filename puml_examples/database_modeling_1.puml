@@ -1,0 +1,11 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+table(FOO1) {
+  primary_key(FIELD1)
+  FIELD2
+}
+@enduml

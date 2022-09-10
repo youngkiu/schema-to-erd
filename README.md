@@ -3,7 +3,8 @@ Generate ERD UML file from Schema DDL file
 
 Sample Schema file
 
-1. [ERDCloud Library](https://www.erdcloud.com/library)
-2. [Sakila Sample Database / Installation](https://dev.mysql.com/doc/sakila/en/sakila-installation.html)
-    - [Other MySQL Documentation](https://dev.mysql.com/doc/index-other.html)
-      - [Example Databases / sakila database](https://downloads.mysql.com/docs/sakila-db.zip)
+1. [Employees Sample Database](https://dev.mysql.com/doc/employee/en/) - https://github.com/datacharmer/test_db
+2. [MySQL Sample Database](https://www.mysqltutorial.org/mysql-sample-database.aspx) - https://www.mysqltutorial.org/wp-content/uploads/2018/03/mysqlsampledatabase.zip
+3. https://github.com/ronaldbradford/schema
+
+![sakila.puml](output/sakila.png)

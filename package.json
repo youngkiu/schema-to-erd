@@ -2,6 +2,7 @@
   "name": "schema-to-erd",
   "version": "1.0.0",
   "description": "Generate ERD UML file from Schema DDL file",
+  "type": "module",
   "main": "schema_to_erd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,7 +25,7 @@
   },
   "homepage": "https://github.com/youngkiu/schema-to-erd#readme",
   "dependencies": {
-    "node-sql-parser": "^4.4.0"
+    "sql-ddl-to-json-schema": "^4.0.6"
   },
   "devDependencies": {
     "eslint": "^8.23.0",

@@ -1,33 +1,64 @@
-// import Parser for all databases
-const { Parser } = require('node-sql-parser');
-const fs = require('fs').promises;
-const path = require('path');
-const assert = require('assert');
-const { splitDdl, extractTableObj } = require('./parse_ddl');
-const { generateEntity } = require('./plantuml_table');
+import { Parser } from 'sql-ddl-to-json-schema';
+import { promises as fs } from 'fs';
+import path from 'path';
+import assert from 'assert';
+import { splitDdl, extractTableObj } from './parse_ddl.js';
+import { generateEntity, generateRelation } from './plantuml_table.js';
 
-const parser = new Parser();
+const parser = new Parser('mysql');
 
 async function main(schemaFilePath, outputDirPath) {
   const sqlStr = await fs.readFile(schemaFilePath, 'utf8');
 
   const ddls = splitDdl(sqlStr);
-  const entities = ddls.reduce(
-    (acc, cur) => {
+  const tableColumns = ddls.reduce(
+    (acc, sql) => {
       try {
-        const ast = parser.astify(cur); // mysql sql grammer parsed by default
-        assert(ast.length === 1, 'Parse only one DDL at a time.');
-        const { tableName, columnNames } = extractTableObj(ast[0]);
-        return acc + generateEntity(tableName, columnNames);
+        const options = { useRef: true };
+        const jsonSchemaDocuments = parser.feed(sql).toJsonSchemaArray(options);
+        if (jsonSchemaDocuments.length === 0) {
+          return acc;
+        }
+        assert(jsonSchemaDocuments.length === 1, 'Parse only one DDL at a time.');
+        const { tableName, columnNames, primaryKeys } = extractTableObj(jsonSchemaDocuments[0]);
+        return { ...acc, [tableName]: { columnNames, primaryKeys } };
       } catch (err) {
-        console.error(`Can not parse "${cur}"`, err);
+        console.error(`Can not parse "${sql}"`, err);
         return acc;
       }
     },
-    '',
+    {},
   );
+  const entities = Object.entries(tableColumns)
+    .reduce(
+      (acc, [tableName, { columnNames, primaryKeys }]) => (
+        acc + generateEntity(tableName, columnNames, primaryKeys)
+      ),
+      '',
+    );
+  const allPKs = Object.entries(tableColumns)
+    .reduce(
+      (acc, [tableName, { primaryKeys }]) => {
+        if (primaryKeys.length !== 1) {
+          return acc;
+        }
 
-  const relations = '';
+        const primaryKey = primaryKeys[0];
+        const primaryKeyInfo = [tableName, primaryKey];
+        if (primaryKey.startsWith(tableName)) {
+          return { ...acc, [primaryKey]: primaryKeyInfo };
+        }
+        return { ...acc, [`${tableName}_${primaryKey}`]: primaryKeyInfo };
+      },
+      {},
+    );
+  const relations = Object.entries(tableColumns)
+    .reduce(
+      (acc, [tableName, { columnNames, primaryKeys }]) => [
+        ...acc, ...generateRelation(tableName, columnNames, primaryKeys, allPKs),
+      ],
+      [],
+    );
 
   // https://plantuml.com/ko/ie-diagram
   const pumlStr = `@startuml
@@ -42,7 +73,7 @@ skinparam linetype ortho
 
 ${entities}
 
-${relations}
+${relations.join('\n')}
 
 @enduml
 `;
@@ -52,7 +83,7 @@ ${relations}
   await fs.writeFile(pumlFilePath, pumlStr, 'utf8');
 }
 
-const schemaFilePath = './sql_samples/database_modeling_4.sql';
+const schemaFilePath = './schema_samples/sakila.sql';
 const outputDirPath = './output';
 
 main(schemaFilePath, outputDirPath);

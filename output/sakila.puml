@@ -1,0 +1,151 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity actor {
+  *actor_id
+  first_name
+  last_name
+  last_update
+}
+entity address {
+  *address_id
+  address
+  address2
+  district
+  city_id
+  postal_code
+  phone
+  last_update
+}
+entity category {
+  *category_id
+  name
+  last_update
+}
+entity city {
+  *city_id
+  city
+  country_id
+  last_update
+}
+entity country {
+  *country_id
+  country
+  last_update
+}
+entity customer {
+  *customer_id
+  store_id
+  first_name
+  last_name
+  email
+  address_id
+  active
+  create_date
+  last_update
+}
+entity film {
+  *film_id
+  title
+  description
+  release_year
+  language_id
+  original_language_id
+  rental_duration
+  rental_rate
+  length
+  replacement_cost
+  rating
+  special_features
+  last_update
+}
+entity film_actor {
+  *actor_id
+  *film_id
+  last_update
+}
+entity film_category {
+  *film_id
+  *category_id
+  last_update
+}
+entity film_text {
+  *film_id
+  title
+  description
+}
+entity inventory {
+  *inventory_id
+  film_id
+  store_id
+  last_update
+}
+entity language {
+  *language_id
+  name
+  last_update
+}
+entity payment {
+  *payment_id
+  customer_id
+  staff_id
+  rental_id
+  amount
+  payment_date
+  last_update
+}
+entity rental {
+  *rental_id
+  rental_date
+  inventory_id
+  customer_id
+  return_date
+  staff_id
+  last_update
+}
+entity staff {
+  *staff_id
+  first_name
+  last_name
+  address_id
+  picture
+  email
+  store_id
+  active
+  username
+  password
+  last_update
+}
+entity store {
+  *store_id
+  manager_staff_id
+  address_id
+  last_update
+}
+
+
+address::city_id --> city::city_id
+city::country_id --> country::country_id
+customer::store_id --> store::store_id
+customer::address_id --> address::address_id
+film::language_id --> language::language_id
+inventory::film_id --> film::film_id
+inventory::store_id --> store::store_id
+payment::customer_id --> customer::customer_id
+payment::staff_id --> staff::staff_id
+payment::rental_id --> rental::rental_id
+rental::inventory_id --> inventory::inventory_id
+rental::customer_id --> customer::customer_id
+rental::staff_id --> staff::staff_id
+staff::address_id --> address::address_id
+staff::store_id --> store::store_id
+store::address_id --> address::address_id
+
+@enduml

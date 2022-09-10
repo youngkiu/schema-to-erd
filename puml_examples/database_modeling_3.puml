@@ -1,0 +1,12 @@
+@startuml
+
+class dummy {
+  Sample table.
+  ==
+  #id int(10) -- A comment
+  field1 int(10)
+  .. Comment line, ignored ..
+  field2 varchar(128)
+}
+
+@enduml
