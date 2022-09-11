@@ -1,3 +1,5 @@
+[![ESLint](https://github.com/youngkiu/schema-to-erd/actions/workflows/eslint.yml/badge.svg)](https://github.com/youngkiu/schema-to-erd/actions/workflows/eslint.yml)
+
 # schema-to-erd
 Generate ERD UML file from Schema DDL file
 
