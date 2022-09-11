@@ -1,12 +1,13 @@
 {
   "name": "schema-to-erd",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Generate ERD UML file from Schema DDL file",
   "type": "module",
-  "main": "src/main.js",
+  "main": "dist/main.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
+    "build": "node scripts/build.js",
     "release": "npm publish --access public"
   },
   "repository": {
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "esbuild": "^0.15.7",
     "eslint": "^8.23.0",
     "eslint-plugin-import": "^2.26.0"
   }
