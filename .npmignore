@@ -6,6 +6,6 @@ node_modules
 output
 puml_examples
 schema_samples
-.eslintrc.cjs
+.eslintrc.json
 .gitignore
 .npmignore
