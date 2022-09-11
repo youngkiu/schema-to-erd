@@ -12,8 +12,8 @@ export function generateRelation(tableName, columnNames, primaryKeys, allPKs) {
   return columnNames.reduce(
     (acc, columnName) => {
       if (!primaryKeys.includes(columnName) && allPkNames.includes(columnName)) {
-        const [foreignKeyTableName, foreignKeyColumnName] = allPKs[columnName];
-        return [...acc, `${tableName}::${columnName} --> ${foreignKeyTableName}::${foreignKeyColumnName}`];
+        const foreignKey = allPKs[columnName];
+        return [...acc, `${tableName}::${columnName} --> ${foreignKey.tableName}::${foreignKey.columnName}`];
       }
       return acc;
     },

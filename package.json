@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Generate ERD UML file from Schema DDL file",
   "type": "module",
-  "main": "schema_to_erd.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

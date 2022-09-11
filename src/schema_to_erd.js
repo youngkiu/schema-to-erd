@@ -7,7 +7,7 @@ import { generateEntity, generateRelation } from './plantuml_table.js';
 
 const parser = new Parser('mysql');
 
-async function main(schemaFilePath, outputDirPath) {
+export async function schemaToErd(schemaFilePath, outputDirPath) {
   const sqlStr = await fs.readFile(schemaFilePath, 'utf8');
 
   const ddls = splitDdl(sqlStr);
@@ -44,11 +44,9 @@ async function main(schemaFilePath, outputDirPath) {
         }
 
         const primaryKey = primaryKeys[0];
-        const primaryKeyInfo = [tableName, primaryKey];
-        if (primaryKey.startsWith(tableName)) {
-          return { ...acc, [primaryKey]: primaryKeyInfo };
-        }
-        return { ...acc, [`${tableName}_${primaryKey}`]: primaryKeyInfo };
+        const primaryKeyName = primaryKey.startsWith(tableName) ? primaryKey : `${tableName}_${primaryKey}`;
+        const foreignKey = { tableName, columnName: primaryKey };
+        return { ...acc, [primaryKeyName]: foreignKey };
       },
       {},
     );
@@ -82,8 +80,3 @@ ${relations.join('\n')}
   await fs.mkdir(outputDirPath, { recursive: true });
   await fs.writeFile(pumlFilePath, pumlStr, 'utf8');
 }
-
-const schemaFilePath = './schema_samples/sakila.sql';
-const outputDirPath = './output';
-
-main(schemaFilePath, outputDirPath);
