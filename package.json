@@ -1,9 +1,9 @@
 {
   "name": "schema-to-erd",
-  "version": "1.0.2",
+  "version": "1.0.9",
   "description": "Generate ERD UML file from Schema DDL file",
   "type": "module",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
