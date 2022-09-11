@@ -1,13 +1,14 @@
 {
   "name": "schema-to-erd",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Generate ERD UML file from Schema DDL file",
   "type": "module",
-  "main": "dist/main.mjs",
+  "main": "dist/main.cjs",
+  "module": "dist/index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
-    "build": "node scripts/build.js",
+    "build": "node build.js",
     "release": "npm publish --access public"
   },
   "repository": {
