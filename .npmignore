@@ -1,0 +1,11 @@
+.DS_Store
+.github
+.vscode
+.idea
+node_modules
+output
+puml_examples
+schema_samples
+.eslintrc.cjs
+.gitignore
+.npmignore
