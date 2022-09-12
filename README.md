@@ -1,4 +1,6 @@
 [![ESLint](https://github.com/youngkiu/schema-to-erd/actions/workflows/eslint.yml/badge.svg)](https://github.com/youngkiu/schema-to-erd/actions/workflows/eslint.yml)
+[![Node.js CI](https://github.com/youngkiu/schema-to-erd/actions/workflows/node.js.yml/badge.svg)](https://github.com/youngkiu/schema-to-erd/actions/workflows/node.js.yml)
+[![Node.js Package](https://github.com/youngkiu/schema-to-erd/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/youngkiu/schema-to-erd/actions/workflows/npm-publish.yml)
 
 # schema-to-erd
 Generate ERD UML file from Schema DDL file
