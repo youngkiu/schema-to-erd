@@ -10,3 +10,4 @@ src
 .eslintrc.json
 .gitignore
 .npmignore
+build.js

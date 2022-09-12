@@ -6,7 +6,7 @@ Generate ERD UML file from Schema DDL file
 ## Installation
 
 ```sh
-npm install schema-to-erd
+npm i schema-to-erd
 ```
 
 ## Usage
