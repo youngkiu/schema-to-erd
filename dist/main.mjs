@@ -43,4 +43,4 @@ ${y.join(`
 `)}
 
 @enduml
-`,T=K_.join(e,`${K_.parse(s).name}.puml`);await Ue.mkdir(e,{recursive:!0}),await Ue.writeFile(T,i,"utf8")}export{ao as schemaToErd};
+`,T=K_.join(e,`${K_.parse(s).name}.puml`);return await Ue.mkdir(e,{recursive:!0}),await Ue.writeFile(T,i,"utf8"),T}export{ao as schemaToErd};

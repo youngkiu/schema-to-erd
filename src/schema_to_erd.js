@@ -79,4 +79,5 @@ ${relations.join('\n')}
   const pumlFilePath = path.join(outputDirPath, `${path.parse(schemaFilePath).name}.puml`);
   await fs.mkdir(outputDirPath, { recursive: true });
   await fs.writeFile(pumlFilePath, pumlStr, 'utf8');
+  return pumlFilePath;
 }

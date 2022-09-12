@@ -7,6 +7,7 @@ output
 puml_examples
 schema_samples
 src
+test
 .eslintrc.json
 .gitignore
 .npmignore

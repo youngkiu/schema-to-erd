@@ -43,4 +43,4 @@ ${y.join(`
 `)}
 
 @enduml
-`,T=Ye.default.join(e,`${Ye.default.parse(s).name}.puml`);await Re.promises.mkdir(e,{recursive:!0}),await Re.promises.writeFile(T,i,"utf8")}0&&(module.exports={schemaToErd});
+`,T=Ye.default.join(e,`${Ye.default.parse(s).name}.puml`);return await Re.promises.mkdir(e,{recursive:!0}),await Re.promises.writeFile(T,i,"utf8"),T}0&&(module.exports={schemaToErd});
