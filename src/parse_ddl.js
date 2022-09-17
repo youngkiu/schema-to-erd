@@ -1,4 +1,9 @@
-export function splitDdl(sqlStr) {
+import { Parser } from 'sql-ddl-to-json-schema';
+import assert from 'assert';
+
+const parser = new Parser('mysql');
+
+function _splitDdl(sqlStr) {
   const ddls = [];
   const ddlRegExp = /(CREATE|ALTER|DROP|RENAME|TRUNCATE)\sTABLE/i;
   let offset = 0;
@@ -17,7 +22,7 @@ export function splitDdl(sqlStr) {
   return ddls;
 }
 
-export function extractTableObj(jsonSchemaDocuments) {
+function _extractTableObj(jsonSchemaDocuments) {
   const tableName = jsonSchemaDocuments.title;
   const columnNames = Object.keys(jsonSchemaDocuments.definitions);
   const primaryKeys = Object.entries(jsonSchemaDocuments.definitions)
@@ -28,3 +33,23 @@ export function extractTableObj(jsonSchemaDocuments) {
     primaryKeys,
   };
 }
+
+export default (sqlStr) =>
+  _splitDdl(sqlStr).reduce(
+    (acc, sql) => {
+      try {
+        const options = { useRef: true };
+        const jsonSchemaDocuments = parser.feed(sql).toJsonSchemaArray(options);
+        if (jsonSchemaDocuments.length === 0) {
+          return acc;
+        }
+        assert(jsonSchemaDocuments.length === 1, 'Parse only one DDL at a time.');
+        const { tableName, columnNames, primaryKeys } = _extractTableObj(jsonSchemaDocuments[0]);
+        return { ...acc, [tableName]: { columnNames, primaryKeys } };
+      } catch (err) {
+        console.error(`Can not parse "${sql}"`, err);
+        return acc;
+      }
+    },
+    {},
+  );
