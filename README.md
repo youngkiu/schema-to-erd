@@ -18,10 +18,7 @@ import { schemaToErd } from 'schema-to-erd';
 // or:
 const { schemaToErd } = require('schema-to-erd');
 
-const schemaFilePath = './schema_samples/sakila.sql';
-const outputDirPath = './output';
-
-schemaToErd(schemaFilePath, outputDirPath);
+schemaToErd('./schema_samples/sakila.sql');
 ```
 
 ### Sample Schema file

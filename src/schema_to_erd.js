@@ -76,8 +76,9 @@ ${relations.join('\n')}
 @enduml
 `;
 
-  const pumlFilePath = path.join(outputDirPath, `${path.parse(schemaFilePath).name}.puml`);
-  await fs.mkdir(outputDirPath, { recursive: true });
+  const pumlDirPath = outputDirPath || path.parse(schemaFilePath).dir;
+  const pumlFilePath = path.join(pumlDirPath, `${path.parse(schemaFilePath).name}.puml`);
+  await fs.mkdir(pumlDirPath, { recursive: true });
   await fs.writeFile(pumlFilePath, pumlStr, 'utf8');
   return pumlFilePath;
 }

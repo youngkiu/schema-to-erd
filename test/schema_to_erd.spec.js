@@ -5,14 +5,11 @@ import assert from 'assert';
 
 describe('samples', () => {
   it('sakila.sql', async () => {
-    const schemaFilePath = './schema_samples/sakila.sql';
-    const resultDirPath = './test';
-    const resultFilePath = await schemaToErd(schemaFilePath, resultDirPath);
-    const resultBuf = await fs.readFile(resultFilePath);
-    const expectedDirPath = './output';
-    const expectedFilePath = path.join(expectedDirPath, path.parse(resultFilePath).base);
+    const pumlFilePath = await schemaToErd('./schema_samples/sakila.sql');
+    const pumlFileBuf = await fs.readFile(pumlFilePath);
+    const expectedFilePath = path.join('./output', path.parse(pumlFilePath).base);
     const expectedBuf = await fs.readFile(expectedFilePath);
-    assert.ok(resultBuf.equals(expectedBuf));
-    await fs.unlink(resultFilePath);
+    assert.ok(pumlFileBuf.equals(expectedBuf));
+    await fs.unlink(pumlFilePath);
   });
 });
