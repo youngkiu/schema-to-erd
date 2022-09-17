@@ -43,4 +43,4 @@ ${o.join(`
 `)}
 
 @enduml
-`}async function uo(s,e){let n=await Ue.readFile(s,"utf8"),o=h_(n),t=C_(o),r=e||ve.parse(s).dir,a=ve.join(r,`${ve.parse(s).name}.puml`);return await Ue.mkdir(r,{recursive:!0}),await Ue.writeFile(a,t,"utf8"),a}export{uo as schemaToErd};
+`}async function iE(s,e){let n=await Ue.readFile(s,"utf8"),o=h_(n),t=C_(o),r=e||ve.parse(s).dir,a=ve.join(r,`${ve.parse(s).name}.puml`);return await Ue.mkdir(r,{recursive:!0}),await Ue.writeFile(a,t,"utf8"),a}export{iE as schemaToErd};

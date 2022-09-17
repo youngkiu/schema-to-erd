@@ -18,7 +18,7 @@ import { schemaToErd } from 'schema-to-erd';
 // or:
 const { schemaToErd } = require('schema-to-erd');
 
-schemaToErd('./schema_samples/sakila.sql');
+schemaToErd('./schema_samples/sakila-schema.sql');
 ```
 
 ### Sample Schema file
@@ -27,4 +27,4 @@ schemaToErd('./schema_samples/sakila.sql');
 2. [MySQL Sample Database](https://www.mysqltutorial.org/mysql-sample-database.aspx) - https://www.mysqltutorial.org/wp-content/uploads/2018/03/mysqlsampledatabase.zip
 3. https://github.com/ronaldbradford/schema
 
-![sakila.puml](output/sakila.png)
+![sakila-schema.puml](puml_examples/sakila-schema.png)
