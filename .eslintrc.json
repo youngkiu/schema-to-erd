@@ -12,5 +12,6 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-case-declarations": "off"
     }
 }
