@@ -32,7 +32,7 @@ function _removeFunctionKeyword(sqlStr, functionKeyword) {
         }
       }
     }
-    assert(removalEnd, 'Not detect removal region');
+    assert(removalEnd, `Not detect removal region - ${sqlStr}`);
     removalSqlStr = removalSqlStr.slice(0, removalStart) + removalSqlStr.slice(removalEnd);
   }
   return removalSqlStr;
@@ -83,8 +83,7 @@ function _splitDdl(sqlStr) {
     }
     const end = restSqlStr.indexOf(';', start) + 1;
     const ddlStr = restSqlStr.substring(start, end);
-    // console.log(ddlStr.replace(/(\r\n|\n|\r)/g, '').replace(/\s+/g, ' '));
-    ddls.push(_removeUnparsableToken(ddlStr));
+    ddls.push(_removeUnparsableToken(ddlStr).replace(/,[\n\r\s]+\)/gm, '\n)'));
     offset += end;
   }
   return ddls;
