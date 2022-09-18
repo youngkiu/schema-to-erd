@@ -1,0 +1,1052 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity ezapprove_items {
+  collaboration_id
+  *id
+  workflow_process_id
+}
+entity ezbasket {
+  *id
+  order_id
+  productcollection_id
+  session_id
+}
+entity ezbinaryfile {
+  *contentobject_attribute_id
+  download_count
+  filename
+  mime_type
+  original_filename
+  *version
+}
+entity ezcobj_state {
+  default_language_id
+  group_id
+  *id
+  identifier
+  language_mask
+  priority
+}
+entity ezcobj_state_group {
+  default_language_id
+  *id
+  identifier
+  language_mask
+}
+entity ezcobj_state_group_language {
+  *contentobject_state_group_id
+  description
+  language_id
+  *real_language_id
+  name
+}
+entity ezcobj_state_language {
+  *contentobject_state_id
+  description
+  *language_id
+  name
+}
+entity ezcobj_state_link {
+  *contentobject_id
+  *contentobject_state_id
+}
+entity ezcollab_group {
+  created
+  depth
+  *id
+  is_open
+  modified
+  parent_group_id
+  path_string
+  priority
+  title
+  user_id
+}
+entity ezcollab_item {
+  created
+  creator_id
+  data_float1
+  data_float2
+  data_float3
+  data_int1
+  data_int2
+  data_int3
+  data_text1
+  data_text2
+  data_text3
+  *id
+  modified
+  status
+  type_identifier
+}
+entity ezcollab_item_group_link {
+  *collaboration_id
+  created
+  *group_id
+  is_active
+  is_read
+  last_read
+  modified
+  *user_id
+}
+entity ezcollab_item_message_link {
+  collaboration_id
+  created
+  *id
+  message_id
+  message_type
+  modified
+  participant_id
+}
+entity ezcollab_item_participant_link {
+  *collaboration_id
+  created
+  is_active
+  is_read
+  last_read
+  modified
+  *participant_id
+  participant_role
+  participant_type
+}
+entity ezcollab_item_status {
+  *collaboration_id
+  is_active
+  is_read
+  last_read
+  *user_id
+}
+entity ezcollab_notification_rule {
+  collab_identifier
+  *id
+  user_id
+}
+entity ezcollab_profile {
+  created
+  data_text1
+  *id
+  main_group
+  modified
+  user_id
+}
+entity ezcollab_simple_message {
+  created
+  creator_id
+  data_float1
+  data_float2
+  data_float3
+  data_int1
+  data_int2
+  data_int3
+  data_text1
+  data_text2
+  data_text3
+  *id
+  message_type
+  modified
+}
+entity ezcontent_language {
+  disabled
+  *id
+  locale
+  name
+}
+entity ezcontentbrowsebookmark {
+  *id
+  name
+  node_id
+  user_id
+}
+entity ezcontentbrowserecent {
+  created
+  *id
+  name
+  node_id
+  user_id
+}
+entity ezcontentclass {
+  always_available
+  contentobject_name
+  created
+  creator_id
+  *id
+  identifier
+  initial_language_id
+  is_container
+  language_mask
+  modified
+  modifier_id
+  remote_id
+  serialized_description_list
+  serialized_name_list
+  sort_field
+  sort_order
+  url_alias_name
+  *version
+}
+entity ezcontentclass_attribute {
+  can_translate
+  category
+  contentclass_id
+  data_float1
+  data_float2
+  data_float3
+  data_float4
+  data_int1
+  data_int2
+  data_int3
+  data_int4
+  data_text1
+  data_text2
+  data_text3
+  data_text4
+  data_text5
+  data_type_string
+  *id
+  identifier
+  is_information_collector
+  is_required
+  is_searchable
+  placement
+  serialized_data_text
+  serialized_description_list
+  serialized_name_list
+  *version
+}
+entity ezcontentclass_classgroup {
+  *contentclass_id
+  *contentclass_version
+  *group_id
+  group_name
+}
+entity ezcontentclass_name {
+  *contentclass_id
+  *contentclass_version
+  *language_id
+  language_locale
+  name
+}
+entity ezcontentclassgroup {
+  created
+  creator_id
+  *id
+  modified
+  modifier_id
+  name
+}
+entity ezcontentobject {
+  contentclass_id
+  current_version
+  *id
+  initial_language_id
+  language_mask
+  modified
+  name
+  owner_id
+  published
+  remote_id
+  section_id
+  status
+}
+entity ezcontentobject_attribute {
+  attribute_original_id
+  contentclassattribute_id
+  contentobject_id
+  data_float
+  data_int
+  data_text
+  data_type_string
+  *id
+  language_code
+  language_id
+  sort_key_int
+  sort_key_string
+  *version
+}
+entity ezcontentobject_link {
+  contentclassattribute_id
+  from_contentobject_id
+  from_contentobject_version
+  *id
+  op_code
+  relation_type
+  to_contentobject_id
+}
+entity ezcontentobject_name {
+  *content_translation
+  *content_version
+  *contentobject_id
+  language_id
+  name
+  real_translation
+}
+entity ezcontentobject_trash {
+  contentobject_id
+  contentobject_version
+  depth
+  is_hidden
+  is_invisible
+  main_node_id
+  modified_subnode
+  *node_id
+  parent_node_id
+  path_identification_string
+  path_string
+  priority
+  remote_id
+  sort_field
+  sort_order
+}
+entity ezcontentobject_tree {
+  contentobject_id
+  contentobject_is_published
+  contentobject_version
+  depth
+  is_hidden
+  is_invisible
+  main_node_id
+  modified_subnode
+  *node_id
+  parent_node_id
+  path_identification_string
+  path_string
+  priority
+  remote_id
+  sort_field
+  sort_order
+}
+entity ezcontentobject_version {
+  contentobject_id
+  created
+  creator_id
+  *id
+  initial_language_id
+  language_mask
+  modified
+  status
+  user_id
+  version
+  workflow_event_pos
+}
+entity ezcurrencydata {
+  auto_rate_value
+  code
+  custom_rate_value
+  *id
+  locale
+  rate_factor
+  status
+  symbol
+}
+entity ezdiscountrule {
+  *id
+  name
+}
+entity ezdiscountsubrule {
+  discount_percent
+  discountrule_id
+  *id
+  limitation
+  name
+}
+entity ezdiscountsubrule_value {
+  *discountsubrule_id
+  *issection
+  *value
+}
+entity ezenumobjectvalue {
+  *contentobject_attribute_id
+  *contentobject_attribute_version
+  enumelement
+  *enumid
+  enumvalue
+}
+entity ezenumvalue {
+  *contentclass_attribute_id
+  *contentclass_attribute_version
+  enumelement
+  enumvalue
+  *id
+  placement
+}
+entity ezforgot_password {
+  hash_key
+  *id
+  time
+  user_id
+}
+entity ezgeneral_digest_user_settings {
+  user_id
+  day
+  digest_type
+  *id
+  receive_digest
+  time
+}
+entity ezimagefile {
+  contentobject_attribute_id
+  filepath
+  *id
+}
+entity ezinfocollection {
+  contentobject_id
+  created
+  creator_id
+  *id
+  modified
+  user_identifier
+}
+entity ezinfocollection_attribute {
+  contentclass_attribute_id
+  contentobject_attribute_id
+  contentobject_id
+  data_float
+  data_int
+  data_text
+  *id
+  informationcollection_id
+}
+entity ezisbn_group {
+  description
+  group_number
+  *id
+}
+entity ezisbn_group_range {
+  from_number
+  group_from
+  group_length
+  group_to
+  *id
+  to_number
+}
+entity ezisbn_registrant_range {
+  from_number
+  *id
+  isbn_group_id
+  registrant_from
+  registrant_length
+  registrant_to
+  to_number
+}
+entity ezkeyword {
+  class_id
+  *id
+  keyword
+}
+entity ezkeyword_attribute_link {
+  *id
+  keyword_id
+  objectattribute_id
+}
+entity ezmedia {
+  *contentobject_attribute_id
+  controls
+  filename
+  has_controller
+  height
+  is_autoplay
+  is_loop
+  mime_type
+  original_filename
+  pluginspage
+  quality
+  *version
+  width
+}
+entity ezmessage {
+  body
+  destination_address
+  *id
+  is_sent
+  send_method
+  send_time
+  send_weekday
+  title
+}
+entity ezmodule_run {
+  function_name
+  *id
+  module_data
+  module_name
+  workflow_process_id
+}
+entity ezmultipricedata {
+  contentobject_attr_id
+  contentobject_attr_version
+  currency_code
+  *id
+  type
+  value
+}
+entity eznode_assignment {
+  contentobject_id
+  contentobject_version
+  from_node_id
+  *id
+  is_main
+  op_code
+  parent_node
+  parent_remote_id
+  remote_id
+  sort_field
+  sort_order
+}
+entity eznotificationcollection {
+  data_subject
+  data_text
+  event_id
+  handler
+  *id
+  transport
+}
+entity eznotificationcollection_item {
+  address
+  collection_id
+  event_id
+  *id
+  send_date
+}
+entity eznotificationevent {
+  data_int1
+  data_int2
+  data_int3
+  data_int4
+  data_text1
+  data_text2
+  data_text3
+  data_text4
+  event_type_string
+  *id
+  status
+}
+entity ezoperation_memento {
+  *id
+  main
+  main_key
+  memento_data
+  *memento_key
+}
+entity ezorder {
+  account_identifier
+  created
+  data_text_1
+  data_text_2
+  email
+  *id
+  ignore_vat
+  is_archived
+  is_temporary
+  order_nr
+  productcollection_id
+  status_id
+  status_modified
+  status_modifier_id
+  user_id
+}
+entity ezorder_nr_incr {
+  *id
+}
+entity ezorder_item {
+  description
+  *id
+  is_vat_inc
+  order_id
+  price
+  type
+  vat_value
+}
+entity ezorder_status {
+  *id
+  is_active
+  name
+  status_id
+}
+entity ezorder_status_history {
+  *id
+  modified
+  modifier_id
+  order_id
+  status_id
+}
+entity ezpackage {
+  *id
+  install_date
+  name
+  version
+}
+entity ezpaymentobject {
+  *id
+  order_id
+  payment_string
+  status
+  workflowprocess_id
+}
+entity ezpdf_export {
+  created
+  creator_id
+  export_classes
+  export_structure
+  *id
+  intro_text
+  modified
+  modifier_id
+  pdf_filename
+  show_frontpage
+  site_access
+  source_node_id
+  status
+  sub_text
+  title
+  *version
+}
+entity ezpending_actions {
+  *id
+  action
+  created
+  param
+}
+entity ezpolicy {
+  function_name
+  *id
+  module_name
+  original_id
+  role_id
+}
+entity ezpolicy_limitation {
+  *id
+  identifier
+  policy_id
+}
+entity ezpolicy_limitation_value {
+  *id
+  limitation_id
+  value
+}
+entity ezpreferences {
+  *id
+  name
+  user_id
+  value
+}
+entity ezprest_authcode {
+  client_id
+  expirytime
+  *id
+  scope
+  user_id
+}
+entity ezprest_authorized_clients {
+  created
+  *id
+  rest_client_id
+  user_id
+}
+entity ezprest_clients {
+  client_id
+  client_secret
+  created
+  description
+  endpoint_uri
+  *id
+  name
+  owner_id
+  updated
+  version
+}
+entity ezprest_token {
+  client_id
+  expirytime
+  *id
+  refresh_token
+  scope
+  user_id
+}
+entity ezproductcategory {
+  *id
+  name
+}
+entity ezproductcollection {
+  created
+  currency_code
+  *id
+}
+entity ezproductcollection_item {
+  contentobject_id
+  discount
+  *id
+  is_vat_inc
+  item_count
+  name
+  price
+  productcollection_id
+  vat_value
+}
+entity ezproductcollection_item_opt {
+  *id
+  item_id
+  name
+  object_attribute_id
+  option_item_id
+  price
+  value
+}
+entity ezpublishingqueueprocesses {
+  created
+  *ezcontentobject_version_id
+  finished
+  pid
+  started
+  status
+}
+entity ezrole {
+  *id
+  is_new
+  name
+  value
+  version
+}
+entity ezrss_export {
+  access_url
+  active
+  created
+  creator_id
+  description
+  *id
+  image_id
+  main_node_only
+  modified
+  modifier_id
+  node_id
+  number_of_objects
+  rss_version
+  site_access
+  *status
+  title
+  url
+}
+entity ezrss_export_item {
+  category
+  class_id
+  description
+  enclosure
+  *id
+  rssexport_id
+  source_node_id
+  *status
+  subnodes
+  title
+}
+entity ezrss_import {
+  active
+  class_description
+  class_id
+  class_title
+  class_url
+  created
+  creator_id
+  destination_node_id
+  *id
+  import_description
+  modified
+  modifier_id
+  name
+  object_owner_id
+  *status
+  url
+}
+entity ezscheduled_script {
+  command
+  *id
+  last_report_timestamp
+  name
+  process_id
+  progress
+  user_id
+}
+entity ezsearch_object_word_link {
+  contentclass_attribute_id
+  contentclass_id
+  contentobject_id
+  frequency
+  *id
+  identifier
+  integer_value
+  next_word_id
+  placement
+  prev_word_id
+  published
+  section_id
+  word_id
+}
+entity ezsearch_return_count {
+  count
+  *id
+  phrase_id
+  time
+}
+entity ezsearch_search_phrase {
+  *id
+  phrase
+  phrase_count
+  result_count
+}
+entity ezsearch_word {
+  *id
+  object_count
+  word
+}
+entity ezsection {
+  *id
+  identifier
+  locale
+  name
+  navigation_part_identifier
+}
+entity ezsession {
+  data
+  expiration_time
+  *session_key
+  user_hash
+  user_id
+}
+entity ezsite_data {
+  *name
+  value
+}
+entity ezsubtree_notification_rule {
+  *id
+  node_id
+  use_digest
+  user_id
+}
+entity eztipafriend_counter {
+  count
+  *node_id
+  *requested
+}
+entity eztipafriend_request {
+  created
+  email_receiver
+}
+entity eztrigger {
+  connect_type
+  function_name
+  *id
+  module_name
+  name
+  workflow_id
+}
+entity ezurl {
+  created
+  *id
+  is_valid
+  last_checked
+  modified
+  original_url_md5
+  url
+}
+entity ezurl_object_link {
+  contentobject_attribute_id
+  contentobject_attribute_version
+  url_id
+}
+entity ezurlalias {
+  destination_url
+  forward_to_id
+  *id
+  is_imported
+  is_internal
+  is_wildcard
+  source_md5
+  source_url
+}
+entity ezurlalias_ml {
+  action
+  action_type
+  alias_redirects
+  id
+  is_alias
+  is_original
+  lang_mask
+  link
+  *parent
+  text
+  *text_md5
+}
+entity ezurlalias_ml_incr {
+  *id
+}
+entity ezurlwildcard {
+  destination_url
+  *id
+  source_url
+  type
+}
+entity ezuser {
+  *contentobject_id
+  email
+  login
+  password_hash
+  password_hash_type
+}
+entity ezuser_accountkey {
+  hash_key
+  *id
+  time
+  user_id
+}
+entity ezuser_discountrule {
+  contentobject_id
+  discountrule_id
+  *id
+  name
+}
+entity ezuser_role {
+  contentobject_id
+  *id
+  limit_identifier
+  limit_value
+  role_id
+}
+entity ezuser_setting {
+  is_enabled
+  max_login
+  *user_id
+}
+entity ezuservisit {
+  current_visit_timestamp
+  failed_login_attempts
+  last_visit_timestamp
+  login_count
+  *user_id
+}
+entity ezvatrule {
+  country_code
+  *id
+  vat_type
+}
+entity ezvatrule_product_category {
+  *product_category_id
+  *vatrule_id
+}
+entity ezvattype {
+  *id
+  name
+  percentage
+}
+entity ezview_counter {
+  count
+  *node_id
+}
+entity ezwaituntildatevalue {
+  contentclass_attribute_id
+  contentclass_id
+  *id
+  *workflow_event_id
+  *workflow_event_version
+}
+entity ezwishlist {
+  *id
+  productcollection_id
+  user_id
+}
+entity ezworkflow {
+  created
+  creator_id
+  *id
+  is_enabled
+  modified
+  modifier_id
+  name
+  *version
+  workflow_type_string
+}
+entity ezworkflow_assign {
+  access_type
+  as_tree
+  *id
+  node_id
+  workflow_id
+}
+entity ezworkflow_event {
+  data_int1
+  data_int2
+  data_int3
+  data_int4
+  data_text1
+  data_text2
+  data_text3
+  data_text4
+  data_text5
+  description
+  *id
+  placement
+  *version
+  workflow_id
+  workflow_type_string
+}
+entity ezworkflow_group {
+  created
+  creator_id
+  *id
+  modified
+  modifier_id
+  name
+}
+entity ezworkflow_group_link {
+  *group_id
+  group_name
+  *workflow_id
+  *workflow_version
+}
+entity ezworkflow_process {
+  activation_date
+  content_id
+  content_version
+  created
+  event_id
+  event_position
+  event_state
+  event_status
+  *id
+  last_event_id
+  last_event_position
+  last_event_status
+  memento_key
+  modified
+  node_id
+  parameters
+  process_key
+  session_key
+  status
+  user_id
+  workflow_id
+}
+entity ezdbfile {
+  datatype
+  name
+  name_trunk
+  *name_hash
+  scope
+  size
+  mtime
+  expired
+}
+entity ezdbfile_data {
+  *name_hash
+  *offset
+  filedata
+}
+
+
+
+
+@enduml

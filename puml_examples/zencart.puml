@@ -1,0 +1,1034 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity upgrade_exceptions {
+  *upgrade_exception_id
+  sql_file
+  reason
+  errordate
+  sqlstatement
+}
+entity address_book {
+  *address_book_id
+  customers_id
+  entry_gender
+  entry_company
+  entry_firstname
+  entry_lastname
+  entry_street_address
+  entry_suburb
+  entry_postcode
+  entry_city
+  entry_state
+  entry_country_id
+  entry_zone_id
+}
+entity address_format {
+  *address_format_id
+  address_format
+  address_summary
+}
+entity admin {
+  *admin_id
+  admin_name
+  admin_email
+  admin_profile
+  admin_pass
+  prev_pass1
+  prev_pass2
+  prev_pass3
+  pwd_last_change_date
+  reset_token
+  last_modified
+  last_login_date
+  last_login_ip
+  failed_logins
+  lockout_expires
+  last_failed_attempt
+  last_failed_ip
+}
+entity admin_activity_log {
+  *log_id
+  access_date
+  admin_id
+  page_accessed
+  page_parameters
+  ip_address
+  flagged
+  attention
+  gzpost
+}
+entity admin_menus {
+  menu_key
+  language_key
+  sort_order
+}
+entity admin_pages {
+  page_key
+  language_key
+  main_page
+  page_params
+  menu_key
+  display_on_menu
+  sort_order
+}
+entity admin_profiles {
+  *profile_id
+  profile_name
+}
+entity admin_pages_to_profiles {
+  profile_id
+  page_key
+}
+entity authorizenet {
+  *id
+  customer_id
+  order_id
+  response_code
+  response_text
+  authorization_type
+  transaction_id
+  sent
+  received
+  time
+  session_id
+}
+entity banners {
+  *banners_id
+  banners_title
+  banners_url
+  banners_image
+  banners_group
+  banners_html_text
+  expires_impressions
+  expires_date
+  date_scheduled
+  date_added
+  date_status_change
+  status
+  banners_open_new_windows
+  banners_on_ssl
+  banners_sort_order
+}
+entity banners_history {
+  *banners_history_id
+  banners_id
+  banners_shown
+  banners_clicked
+  banners_history_date
+}
+entity categories {
+  *categories_id
+  categories_image
+  parent_id
+  sort_order
+  date_added
+  last_modified
+  categories_status
+}
+entity categories_description {
+  *categories_id
+  *language_id
+  categories_name
+  categories_description
+}
+entity configuration {
+  *configuration_id
+  configuration_title
+  configuration_key
+  configuration_value
+  configuration_description
+  configuration_group_id
+  sort_order
+  last_modified
+  date_added
+  use_function
+  set_function
+}
+entity configuration_group {
+  *configuration_group_id
+  configuration_group_title
+  configuration_group_description
+  sort_order
+  visible
+}
+entity counter {
+  startdate
+  counter
+}
+entity counter_history {
+  *startdate
+  counter
+  session_counter
+}
+entity countries {
+  *countries_id
+  countries_name
+  countries_iso_code_2
+  countries_iso_code_3
+  address_format_id
+}
+entity coupon_email_track {
+  *unique_id
+  coupon_id
+  customer_id_sent
+  sent_firstname
+  sent_lastname
+  emailed_to
+  date_sent
+}
+entity coupon_gv_customer {
+  *customer_id
+  amount
+}
+entity coupon_gv_queue {
+  *unique_id
+  customer_id
+  order_id
+  amount
+  date_created
+  ipaddr
+  release_flag
+}
+entity coupon_redeem_track {
+  *unique_id
+  coupon_id
+  customer_id
+  redeem_date
+  redeem_ip
+  order_id
+}
+entity coupon_restrict {
+  *restrict_id
+  coupon_id
+  product_id
+  category_id
+  coupon_restrict
+}
+entity coupons {
+  *coupon_id
+  coupon_type
+  coupon_code
+  coupon_amount
+  coupon_minimum_order
+  coupon_start_date
+  coupon_expire_date
+  uses_per_coupon
+  uses_per_user
+  restrict_to_products
+  restrict_to_categories
+  restrict_to_customers
+  coupon_active
+  date_created
+  date_modified
+  coupon_zone_restriction
+}
+entity coupons_description {
+  *coupon_id
+  *language_id
+  coupon_name
+  coupon_description
+}
+entity currencies {
+  *currencies_id
+  title
+  code
+  symbol_left
+  symbol_right
+  decimal_point
+  thousands_point
+  decimal_places
+  value
+  last_updated
+}
+entity customers {
+  *customers_id
+  customers_gender
+  customers_firstname
+  customers_lastname
+  customers_dob
+  customers_email_address
+  customers_nick
+  customers_default_address_id
+  customers_telephone
+  customers_fax
+  customers_password
+  customers_newsletter
+  customers_group_pricing
+  customers_email_format
+  customers_authorization
+  customers_referral
+  customers_paypal_payerid
+  customers_paypal_ec
+}
+entity customers_basket {
+  *customers_basket_id
+  customers_id
+  products_id
+  customers_basket_quantity
+  final_price
+  customers_basket_date_added
+}
+entity customers_basket_attributes {
+  *customers_basket_attributes_id
+  customers_id
+  products_id
+  products_options_id
+  products_options_value_id
+  products_options_value_text
+  products_options_sort_order
+}
+entity customers_info {
+  *customers_info_id
+  customers_info_date_of_last_logon
+  customers_info_number_of_logons
+  customers_info_date_account_created
+  customers_info_date_account_last_modified
+  global_product_notifications
+}
+entity db_cache {
+  *cache_entry_name
+  cache_data
+  cache_entry_created
+}
+entity email_archive {
+  *archive_id
+  email_to_name
+  email_to_address
+  email_from_name
+  email_from_address
+  email_subject
+  email_html
+  email_text
+  date_sent
+  module
+}
+entity ezpages {
+  *pages_id
+  languages_id
+  pages_title
+  alt_url
+  alt_url_external
+  pages_html_text
+  status_header
+  status_sidebox
+  status_footer
+  status_toc
+  header_sort_order
+  sidebox_sort_order
+  footer_sort_order
+  toc_sort_order
+  page_open_new_window
+  page_is_ssl
+  toc_chapter
+}
+entity featured {
+  *featured_id
+  products_id
+  featured_date_added
+  featured_last_modified
+  expires_date
+  date_status_change
+  status
+  featured_date_available
+}
+entity files_uploaded {
+  *files_uploaded_id
+  sesskey
+  customers_id
+  files_uploaded_name
+}
+entity geo_zones {
+  *geo_zone_id
+  geo_zone_name
+  geo_zone_description
+  last_modified
+  date_added
+}
+entity get_terms_to_filter {
+  *get_term_name
+  get_term_table
+  get_term_name_field
+}
+entity group_pricing {
+  *group_id
+  group_name
+  group_percentage
+  last_modified
+  date_added
+}
+entity languages {
+  *languages_id
+  name
+  code
+  image
+  directory
+  sort_order
+}
+entity layout_boxes {
+  *layout_id
+  layout_template
+  layout_box_name
+  layout_box_status
+  layout_box_location
+  layout_box_sort_order
+  layout_box_sort_order_single
+  layout_box_status_single
+}
+entity manufacturers {
+  *manufacturers_id
+  manufacturers_name
+  manufacturers_image
+  date_added
+  last_modified
+}
+entity manufacturers_info {
+  *manufacturers_id
+  *languages_id
+  manufacturers_url
+  url_clicked
+  date_last_click
+}
+entity media_clips {
+  *clip_id
+  media_id
+  clip_type
+  clip_filename
+  date_added
+  last_modified
+}
+entity media_manager {
+  *media_id
+  media_name
+  last_modified
+  date_added
+}
+entity media_to_products {
+  media_id
+  product_id
+}
+entity media_types {
+  *type_id
+  type_name
+  type_ext
+}
+entity meta_tags_categories_description {
+  *categories_id
+  *language_id
+  metatags_title
+  metatags_keywords
+  metatags_description
+}
+entity meta_tags_products_description {
+  *products_id
+  *language_id
+  metatags_title
+  metatags_keywords
+  metatags_description
+}
+entity music_genre {
+  *music_genre_id
+  music_genre_name
+  date_added
+  last_modified
+}
+entity newsletters {
+  *newsletters_id
+  title
+  content
+  content_html
+  module
+  date_added
+  date_sent
+  status
+  locked
+}
+entity orders {
+  *orders_id
+  customers_id
+  customers_name
+  customers_company
+  customers_street_address
+  customers_suburb
+  customers_city
+  customers_postcode
+  customers_state
+  customers_country
+  customers_telephone
+  customers_email_address
+  customers_address_format_id
+  delivery_name
+  delivery_company
+  delivery_street_address
+  delivery_suburb
+  delivery_city
+  delivery_postcode
+  delivery_state
+  delivery_country
+  delivery_address_format_id
+  billing_name
+  billing_company
+  billing_street_address
+  billing_suburb
+  billing_city
+  billing_postcode
+  billing_state
+  billing_country
+  billing_address_format_id
+  payment_method
+  payment_module_code
+  shipping_method
+  shipping_module_code
+  coupon_code
+  cc_type
+  cc_owner
+  cc_number
+  cc_expires
+  cc_cvv
+  last_modified
+  date_purchased
+  orders_status
+  orders_date_finished
+  currency
+  currency_value
+  order_total
+  order_tax
+  paypal_ipn_id
+  ip_address
+}
+entity orders_products {
+  *orders_products_id
+  orders_id
+  products_id
+  products_model
+  products_name
+  products_price
+  final_price
+  products_tax
+  products_quantity
+  onetime_charges
+  products_priced_by_attribute
+  product_is_free
+  products_discount_type
+  products_discount_type_from
+  products_prid
+}
+entity orders_products_attributes {
+  *orders_products_attributes_id
+  orders_id
+  orders_products_id
+  products_options
+  products_options_values
+  options_values_price
+  price_prefix
+  product_attribute_is_free
+  products_attributes_weight
+  products_attributes_weight_prefix
+  attributes_discounted
+  attributes_price_base_included
+  attributes_price_onetime
+  attributes_price_factor
+  attributes_price_factor_offset
+  attributes_price_factor_onetime
+  attributes_price_factor_onetime_offset
+  attributes_qty_prices
+  attributes_qty_prices_onetime
+  attributes_price_words
+  attributes_price_words_free
+  attributes_price_letters
+  attributes_price_letters_free
+  products_options_id
+  products_options_values_id
+  products_prid
+}
+entity orders_products_download {
+  *orders_products_download_id
+  orders_id
+  orders_products_id
+  orders_products_filename
+  download_maxdays
+  download_count
+  products_prid
+}
+entity orders_status {
+  *orders_status_id
+  *language_id
+  orders_status_name
+}
+entity orders_status_history {
+  *orders_status_history_id
+  orders_id
+  orders_status_id
+  date_added
+  customer_notified
+  comments
+}
+entity orders_total {
+  *orders_total_id
+  orders_id
+  title
+  text
+  value
+  class
+  sort_order
+}
+entity paypal {
+  *paypal_ipn_id
+  order_id
+  txn_type
+  module_name
+  module_mode
+  reason_code
+  payment_type
+  payment_status
+  pending_reason
+  invoice
+  mc_currency
+  first_name
+  last_name
+  payer_business_name
+  address_name
+  address_street
+  address_city
+  address_state
+  address_zip
+  address_country
+  address_status
+  payer_email
+  payer_id
+  payer_status
+  payment_date
+  business
+  receiver_email
+  receiver_id
+  *txn_id
+  parent_txn_id
+  num_cart_items
+  mc_gross
+  mc_fee
+  payment_gross
+  payment_fee
+  settle_amount
+  settle_currency
+  exchange_rate
+  notify_version
+  verify_sign
+  last_modified
+  date_added
+  memo
+}
+entity paypal_payment_status {
+  *payment_status_id
+  payment_status_name
+}
+entity paypal_payment_status_history {
+  *payment_status_history_id
+  paypal_ipn_id
+  txn_id
+  parent_txn_id
+  payment_status
+  pending_reason
+  date_added
+}
+entity paypal_session {
+  *unique_id
+  session_id
+  saved_session
+  expiry
+}
+entity paypal_testing {
+  *paypal_ipn_id
+  order_id
+  custom
+  txn_type
+  module_name
+  module_mode
+  reason_code
+  payment_type
+  payment_status
+  pending_reason
+  invoice
+  mc_currency
+  first_name
+  last_name
+  payer_business_name
+  address_name
+  address_street
+  address_city
+  address_state
+  address_zip
+  address_country
+  address_status
+  payer_email
+  payer_id
+  payer_status
+  payment_date
+  business
+  receiver_email
+  receiver_id
+  *txn_id
+  parent_txn_id
+  num_cart_items
+  mc_gross
+  mc_fee
+  payment_gross
+  payment_fee
+  settle_amount
+  settle_currency
+  exchange_rate
+  notify_version
+  verify_sign
+  last_modified
+  date_added
+  memo
+}
+entity product_music_extra {
+  *products_id
+  artists_id
+  record_company_id
+  music_genre_id
+}
+entity product_type_layout {
+  *configuration_id
+  configuration_title
+  configuration_key
+  configuration_value
+  configuration_description
+  product_type_id
+  sort_order
+  last_modified
+  date_added
+  use_function
+  set_function
+}
+entity product_types {
+  *type_id
+  type_name
+  type_handler
+  type_master_type
+  allow_add_to_cart
+  default_image
+  date_added
+  last_modified
+}
+entity product_types_to_category {
+  product_type_id
+  category_id
+}
+entity products {
+  *products_id
+  products_type
+  products_quantity
+  products_model
+  products_image
+  products_price
+  products_virtual
+  products_date_added
+  products_last_modified
+  products_date_available
+  products_weight
+  products_status
+  products_tax_class_id
+  manufacturers_id
+  products_ordered
+  products_quantity_order_min
+  products_quantity_order_units
+  products_priced_by_attribute
+  product_is_free
+  product_is_call
+  products_quantity_mixed
+  product_is_always_free_shipping
+  products_qty_box_status
+  products_quantity_order_max
+  products_sort_order
+  products_discount_type
+  products_discount_type_from
+  products_price_sorter
+  master_categories_id
+  products_mixed_discount_quantity
+  metatags_title_status
+  metatags_products_name_status
+  metatags_model_status
+  metatags_price_status
+  metatags_title_tagline_status
+}
+entity products_attributes {
+  *products_attributes_id
+  products_id
+  options_id
+  options_values_id
+  options_values_price
+  price_prefix
+  products_options_sort_order
+  product_attribute_is_free
+  products_attributes_weight
+  products_attributes_weight_prefix
+  attributes_display_only
+  attributes_default
+  attributes_discounted
+  attributes_image
+  attributes_price_base_included
+  attributes_price_onetime
+  attributes_price_factor
+  attributes_price_factor_offset
+  attributes_price_factor_onetime
+  attributes_price_factor_onetime_offset
+  attributes_qty_prices
+  attributes_qty_prices_onetime
+  attributes_price_words
+  attributes_price_words_free
+  attributes_price_letters
+  attributes_price_letters_free
+  attributes_required
+}
+entity products_attributes_download {
+  *products_attributes_id
+  products_attributes_filename
+  products_attributes_maxdays
+  products_attributes_maxcount
+}
+entity products_description {
+  *products_id
+  *language_id
+  products_name
+  products_description
+  products_url
+  products_viewed
+}
+entity products_discount_quantity {
+  discount_id
+  products_id
+  discount_qty
+  discount_price
+}
+entity products_notifications {
+  *products_id
+  *customers_id
+  date_added
+}
+entity products_options {
+  *products_options_id
+  *language_id
+  products_options_name
+  products_options_sort_order
+  products_options_type
+  products_options_length
+  products_options_comment
+  products_options_size
+  products_options_images_per_row
+  products_options_images_style
+  products_options_rows
+}
+entity products_options_types {
+  *products_options_types_id
+  products_options_types_name
+}
+entity products_options_values {
+  *products_options_values_id
+  *language_id
+  products_options_values_name
+  products_options_values_sort_order
+}
+entity products_options_values_to_products_options {
+  *products_options_values_to_products_options_id
+  products_options_id
+  products_options_values_id
+}
+entity products_to_categories {
+  *products_id
+  *categories_id
+}
+entity project_version {
+  *project_version_id
+  project_version_key
+  project_version_major
+  project_version_minor
+  project_version_patch1
+  project_version_patch2
+  project_version_patch1_source
+  project_version_patch2_source
+  project_version_comment
+  project_version_date_applied
+}
+entity project_version_history {
+  *project_version_id
+  project_version_key
+  project_version_major
+  project_version_minor
+  project_version_patch
+  project_version_comment
+  project_version_date_applied
+}
+entity query_builder {
+  *query_id
+  query_category
+  query_name
+  query_description
+  query_string
+  query_keys_list
+}
+entity record_artists {
+  *artists_id
+  artists_name
+  artists_image
+  date_added
+  last_modified
+}
+entity record_artists_info {
+  *artists_id
+  *languages_id
+  artists_url
+  url_clicked
+  date_last_click
+}
+entity record_company {
+  *record_company_id
+  record_company_name
+  record_company_image
+  date_added
+  last_modified
+}
+entity record_company_info {
+  *record_company_id
+  *languages_id
+  record_company_url
+  url_clicked
+  date_last_click
+}
+entity reviews {
+  *reviews_id
+  products_id
+  customers_id
+  customers_name
+  reviews_rating
+  date_added
+  last_modified
+  reviews_read
+  status
+}
+entity reviews_description {
+  *reviews_id
+  *languages_id
+  reviews_text
+}
+entity salemaker_sales {
+  *sale_id
+  sale_status
+  sale_name
+  sale_deduction_value
+  sale_deduction_type
+  sale_pricerange_from
+  sale_pricerange_to
+  sale_specials_condition
+  sale_categories_selected
+  sale_categories_all
+  sale_date_start
+  sale_date_end
+  sale_date_added
+  sale_date_last_modified
+  sale_date_status_change
+}
+entity sessions {
+  *sesskey
+  expiry
+  value
+}
+entity specials {
+  *specials_id
+  products_id
+  specials_new_products_price
+  specials_date_added
+  specials_last_modified
+  expires_date
+  date_status_change
+  status
+  specials_date_available
+}
+entity tax_class {
+  *tax_class_id
+  tax_class_title
+  tax_class_description
+  last_modified
+  date_added
+}
+entity tax_rates {
+  *tax_rates_id
+  tax_zone_id
+  tax_class_id
+  tax_priority
+  tax_rate
+  tax_description
+  last_modified
+  date_added
+}
+entity template_select {
+  *template_id
+  template_dir
+  template_language
+}
+entity whos_online {
+  customer_id
+  full_name
+  session_id
+  ip_address
+  time_entry
+  time_last_click
+  last_page_url
+  host_address
+  user_agent
+}
+entity zones {
+  *zone_id
+  zone_country_id
+  zone_code
+  zone_name
+}
+entity zones_to_geo_zones {
+  *association_id
+  zone_country_id
+  zone_id
+  geo_zone_id
+  last_modified
+  date_added
+}
+
+
+address_book::customers_id --> customers::customers_id
+admin_activity_log::admin_id --> admin::admin_id
+banners_history::banners_id --> banners::banners_id
+configuration::configuration_group_id --> configuration_group::configuration_group_id
+countries::address_format_id --> address_format::address_format_id
+customers_basket::customers_id --> customers::customers_id
+customers_basket::products_id --> products::products_id
+customers_basket_attributes::customers_id --> customers::customers_id
+customers_basket_attributes::products_id --> products::products_id
+ezpages::languages_id --> languages::languages_id
+featured::products_id --> products::products_id
+files_uploaded::customers_id --> customers::customers_id
+orders::customers_id --> customers::customers_id
+orders_products::orders_id --> orders::orders_id
+orders_products::products_id --> products::products_id
+orders_products_attributes::orders_id --> orders::orders_id
+orders_products_attributes::orders_products_id --> orders_products::orders_products_id
+orders_products_download::orders_id --> orders::orders_id
+orders_products_download::orders_products_id --> orders_products::orders_products_id
+orders_status_history::orders_id --> orders::orders_id
+orders_total::orders_id --> orders::orders_id
+product_music_extra::record_company_id --> record_company::record_company_id
+product_music_extra::music_genre_id --> music_genre::music_genre_id
+products::manufacturers_id --> manufacturers::manufacturers_id
+products_attributes::products_id --> products::products_id
+products_discount_quantity::products_id --> products::products_id
+reviews::products_id --> products::products_id
+reviews::customers_id --> customers::customers_id
+specials::products_id --> products::products_id
+tax_rates::tax_class_id --> tax_class::tax_class_id
+
+@enduml

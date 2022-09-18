@@ -1,0 +1,528 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity access {
+  *aid
+  mask
+  type
+  status
+}
+entity actions {
+  *aid
+  type
+  callback
+  parameters
+  description
+}
+entity actions_aid {
+  *aid
+}
+entity aggregator_category {
+  *cid
+  title
+  description
+  block
+}
+entity aggregator_category_feed {
+  *fid
+  *cid
+}
+entity aggregator_category_item {
+  *iid
+  *cid
+}
+entity aggregator_feed {
+  *fid
+  title
+  url
+  refresh
+  checked
+  link
+  description
+  image
+  etag
+  modified
+  block
+}
+entity aggregator_item {
+  *iid
+  fid
+  title
+  link
+  author
+  description
+  timestamp
+  guid
+}
+entity authmap {
+  *aid
+  uid
+  authname
+  module
+}
+entity batch {
+  *bid
+  token
+  timestamp
+  batch
+}
+entity blocks {
+  *bid
+  module
+  delta
+  theme
+  status
+  weight
+  region
+  custom
+  throttle
+  visibility
+  pages
+  title
+  cache
+}
+entity blocks_roles {
+  *module
+  *delta
+  *rid
+}
+entity boxes {
+  *bid
+  body
+  info
+  format
+}
+entity cache {
+  *cid
+  data
+  expire
+  created
+  headers
+  serialized
+}
+entity cache_block {
+  *cid
+  data
+  expire
+  created
+  headers
+  serialized
+}
+entity cache_filter {
+  *cid
+  data
+  expire
+  created
+  headers
+  serialized
+}
+entity cache_form {
+  *cid
+  data
+  expire
+  created
+  headers
+  serialized
+}
+entity cache_menu {
+  *cid
+  data
+  expire
+  created
+  headers
+  serialized
+}
+entity cache_page {
+  *cid
+  data
+  expire
+  created
+  headers
+  serialized
+}
+entity cache_update {
+  *cid
+  data
+  expire
+  created
+  headers
+  serialized
+}
+entity comments {
+  *cid
+  pid
+  nid
+  uid
+  subject
+  comment
+  hostname
+  timestamp
+  status
+  format
+  thread
+  name
+  mail
+  homepage
+}
+entity contact {
+  *cid
+  category
+  recipients
+  reply
+  weight
+  selected
+}
+entity files {
+  *fid
+  uid
+  filename
+  filepath
+  filemime
+  filesize
+  status
+  timestamp
+}
+entity filter_formats {
+  *format
+  name
+  roles
+  cache
+}
+entity filters {
+  *fid
+  format
+  module
+  delta
+  weight
+}
+entity flood {
+  *fid
+  event
+  hostname
+  timestamp
+}
+entity history {
+  *uid
+  *nid
+  timestamp
+}
+entity menu_custom {
+  *menu_name
+  title
+  description
+}
+entity menu_links {
+  menu_name
+  *mlid
+  plid
+  link_path
+  router_path
+  link_title
+  options
+  module
+  hidden
+  external
+  has_children
+  expanded
+  weight
+  depth
+  customized
+  p1
+  p2
+  p3
+  p4
+  p5
+  p6
+  p7
+  p8
+  p9
+  updated
+}
+entity menu_router {
+  *path
+  load_functions
+  to_arg_functions
+  access_callback
+  access_arguments
+  page_callback
+  page_arguments
+  fit
+  number_parts
+  tab_parent
+  tab_root
+  title
+  title_callback
+  title_arguments
+  type
+  block_callback
+  description
+  position
+  weight
+  file
+}
+entity node {
+  *nid
+  vid
+  type
+  language
+  title
+  uid
+  status
+  created
+  changed
+  comment
+  promote
+  moderate
+  sticky
+  tnid
+  translate
+}
+entity node_access {
+  *nid
+  *gid
+  *realm
+  grant_view
+  grant_update
+  grant_delete
+}
+entity node_comment_statistics {
+  *nid
+  last_comment_timestamp
+  last_comment_name
+  last_comment_uid
+  comment_count
+}
+entity node_counter {
+  *nid
+  totalcount
+  daycount
+  timestamp
+}
+entity node_revisions {
+  nid
+  *vid
+  uid
+  title
+  body
+  teaser
+  log
+  timestamp
+  format
+}
+entity node_type {
+  *type
+  name
+  module
+  description
+  help
+  has_title
+  title_label
+  has_body
+  body_label
+  min_word_count
+  custom
+  modified
+  locked
+  orig_type
+}
+entity openid_association {
+  idp_endpoint_uri
+  *assoc_handle
+  assoc_type
+  session_type
+  mac_key
+  created
+  expires_in
+}
+entity permission {
+  *pid
+  rid
+  perm
+  tid
+}
+entity poll {
+  *nid
+  runtime
+  active
+}
+entity poll_choices {
+  *chid
+  nid
+  chtext
+  chvotes
+  chorder
+}
+entity poll_votes {
+  *nid
+  *uid
+  chorder
+  *hostname
+}
+entity profile_fields {
+  *fid
+  title
+  name
+  explanation
+  category
+  page
+  type
+  weight
+  required
+  register
+  visibility
+  autocomplete
+  options
+}
+entity profile_values {
+  *fid
+  *uid
+  value
+}
+entity role {
+  *rid
+  name
+}
+entity search_dataset {
+  sid
+  type
+  data
+  reindex
+}
+entity search_index {
+  word
+  sid
+  type
+  score
+}
+entity search_node_links {
+  *sid
+  *type
+  *nid
+  caption
+}
+entity search_total {
+  *word
+  count
+}
+entity sessions {
+  uid
+  *sid
+  hostname
+  timestamp
+  cache
+  session
+}
+entity system {
+  *filename
+  name
+  type
+  owner
+  status
+  throttle
+  bootstrap
+  schema_version
+  weight
+  info
+}
+entity term_data {
+  *tid
+  vid
+  name
+  description
+  weight
+}
+entity term_hierarchy {
+  *tid
+  *parent
+}
+entity term_node {
+  nid
+  *vid
+  *tid
+}
+entity term_relation {
+  *trid
+  tid1
+  tid2
+}
+entity term_synonym {
+  *tsid
+  tid
+  name
+}
+entity url_alias {
+  *pid
+  src
+  dst
+  language
+}
+entity users {
+  *uid
+  name
+  pass
+  mail
+  mode
+  sort
+  threshold
+  theme
+  signature
+  created
+  access
+  login
+  status
+  timezone
+  language
+  picture
+  init
+  data
+}
+entity users_roles {
+  *uid
+  *rid
+}
+entity variable {
+  *name
+  value
+}
+entity vocabulary {
+  *vid
+  name
+  description
+  help
+  relations
+  hierarchy
+  multiple
+  required
+  tags
+  module
+  weight
+}
+entity vocabulary_node_types {
+  *vid
+  *type
+}
+entity watchdog {
+  *wid
+  uid
+  type
+  message
+  variables
+  severity
+  link
+  location
+  referer
+  hostname
+  timestamp
+}
+
+
+
+
+@enduml

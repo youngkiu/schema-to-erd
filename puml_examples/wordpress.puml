@@ -1,0 +1,136 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity wp_commentmeta {
+  *meta_id
+  comment_id
+  meta_key
+  meta_value
+}
+entity wp_comments {
+  *comment_ID
+  comment_post_ID
+  comment_author
+  comment_author_email
+  comment_author_url
+  comment_author_IP
+  comment_date
+  comment_date_gmt
+  comment_content
+  comment_karma
+  comment_approved
+  comment_agent
+  comment_type
+  comment_parent
+  user_id
+}
+entity wp_ec3_schedule {
+  *sched_id
+  post_id
+  start
+  end
+  allday
+  rpt
+}
+entity wp_links {
+  *link_id
+  link_url
+  link_name
+  link_image
+  link_target
+  link_description
+  link_visible
+  link_owner
+  link_rating
+  link_updated
+  link_rel
+  link_notes
+  link_rss
+}
+entity wp_options {
+  *option_id
+  blog_id
+  option_name
+  option_value
+  autoload
+}
+entity wp_postmeta {
+  *meta_id
+  post_id
+  meta_key
+  meta_value
+}
+entity wp_posts {
+  *ID
+  post_author
+  post_date
+  post_date_gmt
+  post_content
+  post_title
+  post_excerpt
+  post_status
+  comment_status
+  ping_status
+  post_password
+  post_name
+  to_ping
+  pinged
+  post_modified
+  post_modified_gmt
+  post_content_filtered
+  post_parent
+  guid
+  menu_order
+  post_type
+  post_mime_type
+  comment_count
+}
+entity wp_term_relationships {
+  *object_id
+  *term_taxonomy_id
+  term_order
+}
+entity wp_term_taxonomy {
+  *term_taxonomy_id
+  term_id
+  taxonomy
+  description
+  parent
+  count
+}
+entity wp_terms {
+  *term_id
+  name
+  slug
+  term_group
+}
+entity wp_usermeta {
+  *umeta_id
+  user_id
+  meta_key
+  meta_value
+}
+entity wp_users {
+  *ID
+  user_login
+  user_pass
+  user_nicename
+  user_email
+  user_url
+  user_registered
+  user_activation_key
+  user_status
+  display_name
+}
+
+
+
+
+@enduml

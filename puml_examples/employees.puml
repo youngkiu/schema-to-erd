@@ -1,0 +1,51 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity employees {
+  *emp_no
+  birth_date
+  first_name
+  last_name
+  gender
+  hire_date
+}
+entity departments {
+  *dept_no
+  dept_name
+}
+entity dept_manager {
+  *dept_no
+  *emp_no
+  from_date
+  to_date
+}
+entity dept_emp {
+  *emp_no
+  *dept_no
+  from_date
+  to_date
+}
+entity titles {
+  *emp_no
+  *title
+  *from_date
+  to_date
+}
+entity salaries {
+  *emp_no
+  salary
+  *from_date
+  to_date
+}
+
+
+
+
+@enduml

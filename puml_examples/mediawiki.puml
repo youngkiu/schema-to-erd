@@ -1,0 +1,221 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity category {
+  *cat_id
+  cat_title
+  cat_pages
+  cat_subcats
+  cat_files
+  cat_hidden
+}
+entity categorylinks {
+  cl_from
+  cl_to
+  cl_sortkey
+  cl_timestamp
+}
+entity change_tag {
+  ct_rc_id
+  ct_log_id
+  ct_rev_id
+  ct_tag
+  ct_params
+}
+entity externallinks {
+  el_from
+  el_to
+  el_index
+}
+entity hitcounter {
+  hc_id
+}
+entity image {
+  *img_name
+  img_size
+  img_width
+  img_height
+  img_metadata
+  img_bits
+  img_media_type
+  img_major_mime
+  img_minor_mime
+  img_description
+  img_user
+  img_user_text
+  img_timestamp
+  img_sha1
+}
+entity imagelinks {
+  il_from
+  il_to
+}
+entity interwiki {
+  iw_prefix
+  iw_url
+  iw_local
+  iw_trans
+}
+entity job {
+  *job_id
+  job_cmd
+  job_namespace
+  job_title
+  job_params
+}
+entity langlinks {
+  ll_from
+  ll_lang
+  ll_title
+}
+entity math {
+  math_inputhash
+  math_outputhash
+  math_html_conservativeness
+  math_html
+  math_mathml
+}
+entity objectcache {
+  *keyname
+  value
+  exptime
+}
+entity page_props {
+  pp_page
+  pp_propname
+  pp_value
+}
+entity page_restrictions {
+  pr_page
+  pr_type
+  pr_level
+  pr_cascade
+  pr_user
+  pr_expiry
+  *pr_id
+}
+entity pagelinks {
+  pl_from
+  pl_namespace
+  pl_title
+}
+entity querycache {
+  qc_type
+  qc_value
+  qc_namespace
+  qc_title
+}
+entity querycachetwo {
+  qcc_type
+  qcc_value
+  qcc_namespace
+  qcc_title
+  qcc_namespacetwo
+  qcc_titletwo
+}
+entity recentchanges {
+  *rc_id
+  rc_timestamp
+  rc_cur_time
+  rc_user
+  rc_user_text
+  rc_namespace
+  rc_title
+  rc_comment
+  rc_minor
+  rc_bot
+  rc_new
+  rc_cur_id
+  rc_this_oldid
+  rc_last_oldid
+  rc_type
+  rc_moved_to_ns
+  rc_moved_to_title
+  rc_patrolled
+  rc_ip
+  rc_old_len
+  rc_new_len
+  rc_deleted
+  rc_logid
+  rc_log_type
+  rc_log_action
+  rc_params
+}
+entity redirect {
+  *rd_from
+  rd_namespace
+  rd_title
+}
+entity searchindex {
+  si_page
+  si_title
+  si_text
+}
+entity site_stats {
+  ss_row_id
+  ss_total_views
+  ss_total_edits
+  ss_good_articles
+  ss_total_pages
+  ss_users
+  ss_active_users
+  ss_admins
+  ss_images
+}
+entity tag_summary {
+  ts_rc_id
+  ts_log_id
+  ts_rev_id
+  ts_tags
+}
+entity templatelinks {
+  tl_from
+  tl_namespace
+  tl_title
+}
+entity text {
+  *old_id
+  old_text
+  old_flags
+}
+entity trackbacks {
+  *tb_id
+  tb_page
+  tb_title
+  tb_url
+  tb_ex
+  tb_name
+}
+entity transcache {
+  tc_url
+  tc_contents
+  tc_time
+}
+entity updatelog {
+  *ul_key
+}
+entity user_groups {
+  ug_user
+  ug_group
+}
+entity valid_tag {
+  *vt_tag
+}
+entity watchlist {
+  wl_user
+  wl_namespace
+  wl_title
+  wl_notificationtimestamp
+}
+
+
+
+
+@enduml

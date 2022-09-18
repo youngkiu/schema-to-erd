@@ -1,15 +1,41 @@
-import { schemaToErd } from '../src/schema_to_erd.js';
+import schemaToErd from '../src/schema_to_erd.js';
 import { promises as fs } from 'fs';
-import path from "path";
+import path from 'path';
+import glob from 'glob';
 import assert from 'assert';
 
-describe('samples', () => {
-  it('sakila-schema.sql', async () => {
-    const pumlFilePath = await schemaToErd('./schema_samples/sakila-schema.sql');
-    const pumlFileBuf = await fs.readFile(pumlFilePath);
-    const expectedFilePath = path.join('./puml_examples', path.parse(pumlFilePath).base);
-    const expectedBuf = await fs.readFile(expectedFilePath);
-    assert.ok(pumlFileBuf.equals(expectedBuf));
-    await fs.unlink(pumlFilePath);
-  });
+const getSqlFiles = (pattern, options) => {
+  return new Promise((resolve, reject) => {
+    glob(pattern, options, (err, data) => {
+      if (err) return reject(err)
+      resolve(data)
+    })
+  })
+}
+
+const compareFiles = async (filePath1, filePath2) => {
+  const isExistsFilePath1 = !!(await fs.stat(filePath1).catch((e) => false));
+  const isExistsFilePath2 = !!(await fs.stat(filePath2).catch((e) => false));
+  if (isExistsFilePath1 !== isExistsFilePath2) {
+    return false;
+  }
+
+  const filePath1Buf = await fs.readFile(filePath1);
+  const filePath2Buf = await fs.readFile(filePath2);
+  const isEqual = filePath1Buf.equals(filePath2Buf);
+  await fs.unlink(filePath1);
+  return isEqual;
+};
+
+const fileList = await getSqlFiles('schema_samples/*.sql');
+console.log(fileList);
+
+describe('samples',  () => {
+  fileList.map((filePath) => {
+    it(path.parse(filePath).base, async () => {
+      const pumlFilePath = await schemaToErd(filePath);
+      const expectedFilePath = path.join('./puml_examples', path.parse(pumlFilePath).base);
+      assert.ok(await compareFiles(pumlFilePath, expectedFilePath));
+    });
+  })
 });

@@ -1,7 +1,34 @@
 import { Parser } from 'sql-ddl-to-json-schema';
 import assert from 'assert';
+import _ from 'lodash';
+import config from './unparsable_token.json' assert { type: "json" };
 
 const parser = new Parser('mysql');
+
+function _removeUnparsableToken(ddlStr) {
+  return Object.keys(config).reduce(
+    (acc, unparsableType) => {
+      const values = config[unparsableType];
+      if (_.isEmpty(values)) {
+        return acc;
+      }
+      switch(unparsableType) {
+        case 'token':
+          const unparsableTokens = values.join('|');
+          const re = new RegExp(`\\s+(${unparsableTokens})\\b`, 'gmi');
+          return acc.replace(re, '');
+        case 'line':
+          return acc;
+        case 'statement':
+          return acc;
+        default:
+          assert(false, `Not supported token type: ${unparsableType}`);
+          break;
+      }
+    },
+    ddlStr
+  );
+}
 
 function _splitDdl(sqlStr) {
   const ddls = [];
@@ -16,7 +43,7 @@ function _splitDdl(sqlStr) {
     const end = restSqlStr.indexOf(';', start) + 1;
     const ddlStr = restSqlStr.substring(start, end);
     // console.log(ddlStr.replace(/(\r\n|\n|\r)/g, '').replace(/\s+/g, ' '));
-    ddls.push(ddlStr);
+    ddls.push(_removeUnparsableToken(ddlStr));
     offset += end;
   }
   return ddls;

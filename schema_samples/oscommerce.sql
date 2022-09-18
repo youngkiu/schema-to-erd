@@ -68,7 +68,7 @@ CREATE TABLE address_format (
 DROP TABLE IF EXISTS administrators;
 CREATE TABLE administrators (
   id int NOT NULL auto_increment,
-  user_name varchar(255) NOT NULL,
+  user_name varchar(255) binary NOT NULL,
   user_password varchar(60) NOT NULL,
   PRIMARY KEY (id)
 );

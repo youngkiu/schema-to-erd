@@ -1,0 +1,90 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity customers {
+  *customerNumber
+  customerName
+  contactLastName
+  contactFirstName
+  phone
+  addressLine1
+  addressLine2
+  city
+  state
+  postalCode
+  country
+  salesRepEmployeeNumber
+  creditLimit
+}
+entity employees {
+  *employeeNumber
+  lastName
+  firstName
+  extension
+  email
+  officeCode
+  reportsTo
+  jobTitle
+}
+entity offices {
+  *officeCode
+  city
+  phone
+  addressLine1
+  addressLine2
+  state
+  country
+  postalCode
+  territory
+}
+entity orderdetails {
+  *orderNumber
+  *productCode
+  quantityOrdered
+  priceEach
+  orderLineNumber
+}
+entity orders {
+  *orderNumber
+  orderDate
+  requiredDate
+  shippedDate
+  status
+  comments
+  customerNumber
+}
+entity payments {
+  *customerNumber
+  *checkNumber
+  paymentDate
+  amount
+}
+entity productlines {
+  *productLine
+  textDescription
+  htmlDescription
+  image
+}
+entity products {
+  *productCode
+  productName
+  productLine
+  productScale
+  productVendor
+  productDescription
+  quantityInStock
+  buyPrice
+  MSRP
+}
+
+
+
+
+@enduml

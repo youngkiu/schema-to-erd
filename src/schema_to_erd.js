@@ -3,7 +3,7 @@ import path from 'path';
 import parseDdl from './parse_ddl.js';
 import generatePlantUml from './plantuml_table.js';
 
-export async function schemaToErd(schemaFilePath, outputDirPath) {
+export default async function(schemaFilePath, outputDirPath) {
   const sqlStr = await fs.readFile(schemaFilePath, 'utf8');
 
   const tableColumns = parseDdl(sqlStr);

@@ -1,0 +1,666 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity #__assets {
+  *id
+  parent_id
+  lft
+  rgt
+  level
+  name
+  title
+  rules
+}
+entity #__associations {
+  *id
+  *context
+  key
+}
+entity #__banners {
+  *id
+  cid
+  type
+  name
+  alias
+  imptotal
+  impmade
+  clicks
+  clickurl
+  state
+  catid
+  description
+  custombannercode
+  sticky
+  ordering
+  metakey
+  params
+  own_prefix
+  metakey_prefix
+  purchase_type
+  track_clicks
+  track_impressions
+  checked_out
+  checked_out_time
+  publish_up
+  publish_down
+  reset
+  created
+  language
+  created_by
+  created_by_alias
+  modified
+  modified_by
+  version
+}
+entity #__banner_clients {
+  *id
+  name
+  contact
+  email
+  extrainfo
+  state
+  checked_out
+  checked_out_time
+  metakey
+  own_prefix
+  metakey_prefix
+  purchase_type
+  track_clicks
+  track_impressions
+}
+entity #__banner_tracks {
+  *track_date
+  *track_type
+  *banner_id
+  count
+}
+entity #__categories {
+  *id
+  asset_id
+  parent_id
+  lft
+  rgt
+  level
+  path
+  extension
+  title
+  alias
+  note
+  description
+  published
+  checked_out
+  checked_out_time
+  access
+  params
+  metadesc
+  metakey
+  metadata
+  created_user_id
+  created_time
+  modified_user_id
+  modified_time
+  hits
+  language
+  version
+}
+entity #__contact_details {
+  *id
+  name
+  alias
+  con_position
+  address
+  suburb
+  state
+  country
+  postcode
+  telephone
+  fax
+  misc
+  image
+  email_to
+  default_con
+  published
+  checked_out
+  checked_out_time
+  ordering
+  params
+  user_id
+  catid
+  access
+  mobile
+  webpage
+  sortname1
+  sortname2
+  sortname3
+  language
+  created
+  created_by
+  created_by_alias
+  modified
+  modified_by
+  metakey
+  metadesc
+  metadata
+  featured
+  xreference
+  publish_up
+  publish_down
+  version
+  hits
+}
+entity #__content {
+  *id
+  asset_id
+  title
+  alias
+  introtext
+  fulltext
+  state
+  catid
+  created
+  created_by
+  created_by_alias
+  modified
+  modified_by
+  checked_out
+  checked_out_time
+  publish_up
+  publish_down
+  images
+  urls
+  attribs
+  version
+  ordering
+  metakey
+  metadesc
+  access
+  hits
+  metadata
+  featured
+  language
+  xreference
+}
+entity #__content_frontpage {
+  *content_id
+  ordering
+}
+entity #__content_rating {
+  *content_id
+  rating_sum
+  rating_count
+  lastip
+}
+entity #__core_log_searches {
+  search_term
+  hits
+}
+entity #__extensions {
+  *extension_id
+  name
+  type
+  element
+  folder
+  client_id
+  enabled
+  access
+  protected
+  manifest_cache
+  params
+  custom_data
+  system_data
+  checked_out
+  checked_out_time
+  ordering
+  state
+}
+entity #__finder_filters {
+  *filter_id
+  title
+  alias
+  state
+  created
+  created_by
+  created_by_alias
+  modified
+  modified_by
+  checked_out
+  checked_out_time
+  map_count
+  data
+  params
+}
+entity #__finder_links {
+  *link_id
+  url
+  route
+  title
+  description
+  indexdate
+  md5sum
+  published
+  state
+  access
+  language
+  publish_start_date
+  publish_end_date
+  start_date
+  end_date
+  list_price
+  sale_price
+  type_id
+  object
+}
+entity #__finder_links_terms0 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms1 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms2 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms3 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms4 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms5 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms6 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms7 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms8 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_terms9 {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_termsa {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_termsb {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_termsc {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_termsd {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_termse {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_links_termsf {
+  *link_id
+  *term_id
+  weight
+}
+entity #__finder_taxonomy {
+  *id
+  parent_id
+  title
+  state
+  access
+  ordering
+}
+entity #__finder_taxonomy_map {
+  *link_id
+  *node_id
+}
+entity #__finder_terms {
+  *term_id
+  term
+  stem
+  common
+  phrase
+  weight
+  soundex
+  links
+  language
+}
+entity #__finder_terms_common {
+  term
+  language
+}
+entity #__finder_tokens {
+  term
+  stem
+  common
+  phrase
+  weight
+  context
+  language
+}
+entity #__finder_tokens_aggregate {
+  term_id
+  map_suffix
+  term
+  stem
+  common
+  phrase
+  term_weight
+  context
+  context_weight
+  total_weight
+  language
+}
+entity #__finder_types {
+  *id
+  title
+  mime
+}
+entity #__languages {
+  *lang_id
+  lang_code
+  title
+  title_native
+  sef
+  image
+  description
+  metakey
+  metadesc
+  sitename
+  published
+  access
+  ordering
+}
+entity #__menu {
+  *id
+  menutype
+  title
+  alias
+  note
+  path
+  link
+  type
+  published
+  parent_id
+  level
+  component_id
+  checked_out
+  checked_out_time
+  browserNav
+  access
+  img
+  template_style_id
+  params
+  lft
+  rgt
+  home
+  language
+  client_id
+}
+entity #__menu_types {
+  *id
+  menutype
+  title
+  description
+}
+entity #__messages {
+  *message_id
+  user_id_from
+  user_id_to
+  folder_id
+  date_time
+  state
+  priority
+  subject
+  message
+}
+entity #__messages_cfg {
+  user_id
+  cfg_name
+  cfg_value
+}
+entity #__modules {
+  *id
+  title
+  note
+  content
+  ordering
+  position
+  checked_out
+  checked_out_time
+  publish_up
+  publish_down
+  published
+  module
+  access
+  showtitle
+  params
+  client_id
+  language
+}
+entity #__modules_menu {
+  *moduleid
+  *menuid
+}
+entity #__newsfeeds {
+  catid
+  *id
+  name
+  alias
+  link
+  published
+  numarticles
+  cache_time
+  checked_out
+  checked_out_time
+  ordering
+  rtl
+  access
+  language
+  params
+  created
+  created_by
+  created_by_alias
+  modified
+  modified_by
+  metakey
+  metadesc
+  metadata
+  xreference
+  publish_up
+  publish_down
+  description
+  version
+  hits
+  images
+}
+entity #__overrider {
+  *id
+  constant
+  string
+  file
+}
+entity #__redirect_links {
+  *id
+  old_url
+  new_url
+  referer
+  comment
+  hits
+  published
+  created_date
+  modified_date
+}
+entity #__schemas {
+  *extension_id
+  *version_id
+}
+entity #__session {
+  *session_id
+  client_id
+  guest
+  time
+  data
+  userid
+  username
+}
+entity #__template_styles {
+  *id
+  template
+  client_id
+  home
+  title
+  params
+}
+entity #__updates {
+  *update_id
+  update_site_id
+  extension_id
+  name
+  description
+  element
+  type
+  folder
+  client_id
+  version
+  data
+  detailsurl
+  infourl
+}
+entity #__update_sites {
+  *update_site_id
+  name
+  type
+  location
+  enabled
+  last_check_timestamp
+}
+entity #__update_sites_extensions {
+  *update_site_id
+  *extension_id
+}
+entity #__usergroups {
+  *id
+  parent_id
+  lft
+  rgt
+  title
+}
+entity #__users {
+  *id
+  name
+  username
+  email
+  password
+  block
+  sendEmail
+  registerDate
+  lastvisitDate
+  activation
+  params
+  lastResetTime
+  resetCount
+}
+entity #__user_notes {
+  *id
+  user_id
+  catid
+  subject
+  body
+  state
+  checked_out
+  checked_out_time
+  created_user_id
+  created_time
+  modified_user_id
+  modified_time
+  review_time
+  publish_up
+  publish_down
+}
+entity #__user_profiles {
+  user_id
+  profile_key
+  profile_value
+  ordering
+}
+entity #__user_usergroup_map {
+  *user_id
+  *group_id
+}
+entity #__viewlevels {
+  *id
+  title
+  ordering
+  rules
+}
+entity #__weblinks {
+  *id
+  catid
+  title
+  alias
+  url
+  description
+  hits
+  state
+  checked_out
+  checked_out_time
+  ordering
+  access
+  params
+  language
+  created
+  created_by
+  created_by_alias
+  modified
+  modified_by
+  metakey
+  metadesc
+  metadata
+  featured
+  xreference
+  publish_up
+  publish_down
+  version
+  images
+}
+
+
+
+
+@enduml

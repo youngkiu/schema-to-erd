@@ -14,9 +14,9 @@ npm i schema-to-erd
 ## Usage
 
 ```js
-import { schemaToErd } from 'schema-to-erd';
+import schemaToErd from 'schema-to-erd';
 // or:
-const { schemaToErd } = require('schema-to-erd');
+const schemaToErd = require('schema-to-erd');
 
 schemaToErd('./schema_samples/sakila-schema.sql');
 ```
