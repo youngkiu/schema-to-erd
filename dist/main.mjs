@@ -63,7 +63,7 @@ ${E.join(`
 `)}
 
 @enduml
-`}async function SI(s,t){let o=await vo.readFile(s,"utf8"),E=_a(o),T=oa(E),c=t||go.parse(s).dir,O=go.join(c,`${go.parse(s).name}.puml`);return await vo.mkdir(c,{recursive:!0}),await vo.writeFile(O,T,"utf8"),O}export{SI as default};
+`}async function xm(s,t){let o=await vo.readFile(s,"utf8"),E=_a(o),T=oa(E),c=t||go.parse(s).dir,O=go.join(c,`${go.parse(s).name}.puml`);return await vo.mkdir(c,{recursive:!0}),await vo.writeFile(O,T,"utf8"),O}export{xm as schemaToErd};
 /**
  * @license
  * Lodash <https://lodash.com/>

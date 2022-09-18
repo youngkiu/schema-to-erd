@@ -1,10 +1,10 @@
 {
   "name": "schema-to-erd",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Generate ERD UML file from Schema DDL file",
   "type": "module",
-  "main": "dist/schema_to_erd.cjs",
-  "module": "dist/schema_to_erd.mjs",
+  "main": "dist/main.cjs",
+  "module": "dist/main.mjs",
   "scripts": {
     "test": "mocha --timeout 10000",
     "lint": "eslint src",

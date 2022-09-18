@@ -3,7 +3,7 @@ import esbuild from 'esbuild';
 
 const commonOptions  = {
   // https://esbuild.github.io/api/
-  entryPoints: ['src/schema_to_erd.js'],
+  entryPoints: ['src/main.js'],
   bundle: true,
   platform: 'node',
   minify: true,
