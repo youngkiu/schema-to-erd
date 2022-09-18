@@ -34,6 +34,13 @@ const fileList = await getSqlFiles('schema_samples/**/*.sql');
 console.log(fileList);
 
 describe('samples',  () => {
+  it('function.sql', async () => {
+    const pumlFilePath = await schemaToErd('./schema_samples/function.sql');
+    const { dir, base } = path.parse(pumlFilePath);
+    const pathParts = dir.split(path.sep);
+    const expectedFilePath = path.join('./puml_examples', ...pathParts.slice(1), base);
+    assert.ok(await compareFiles(pumlFilePath, expectedFilePath));
+  });
   fileList.map((filePath) => {
     it(path.parse(filePath).base, async () => {
       const pumlFilePath = await schemaToErd(filePath);

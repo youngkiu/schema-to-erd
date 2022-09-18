@@ -26,13 +26,10 @@ function _removeFunctionKeyword(sqlStr, functionKeyword) {
         parenthesesDepth += 1;
       } else if (c === ')') {
         parenthesesDepth -= 1;
-        assert(parenthesesDepth >= 0, `parenthesesDepth(${parenthesesDepth}) is minus value`);
         if (parenthesesDepth === 0) {
           removalEnd = i+1;
+          break;
         }
-      }
-      if (c === '\n' && removalEnd && parenthesesDepth === 0) {
-        break;
       }
     }
     assert(removalEnd, 'Not detect removal region');
