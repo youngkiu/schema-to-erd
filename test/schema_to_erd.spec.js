@@ -42,5 +42,5 @@ describe('samples',  () => {
       const expectedFilePath = path.join('./puml_examples', ...pathParts.slice(1), base);
       assert.ok(await compareFiles(pumlFilePath, expectedFilePath));
     });
-  })
+  });
 });

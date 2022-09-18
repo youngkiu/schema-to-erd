@@ -5,6 +5,49 @@ import config from './config.js';
 
 const parser = new Parser('mysql');
 
+function _removeFunctionKeyword(sqlStr, functionKeyword) {
+  let removalSqlStr = sqlStr;
+  let parenthesesDepth;
+  let removalStart;
+  let removalEnd;
+
+  /* eslint-disable no-constant-condition */
+  while (true) {
+    removalStart = removalSqlStr.indexOf(functionKeyword);
+    if (removalStart === -1) {
+      break;
+    }
+
+    parenthesesDepth = 0;
+    removalEnd = undefined;
+    for (let i = removalStart + functionKeyword.length; i < removalSqlStr.length; i++) {
+      let c = removalSqlStr.charAt(i);
+      if (c === '(') {
+        parenthesesDepth += 1;
+      } else if (c === ')') {
+        parenthesesDepth -= 1;
+        assert(parenthesesDepth >= 0, `parenthesesDepth(${parenthesesDepth}) is minus value`);
+        if (parenthesesDepth === 0) {
+          removalEnd = i+1;
+        }
+      }
+      if (c === '\n' && removalEnd && parenthesesDepth === 0) {
+        break;
+      }
+    }
+    assert(removalEnd, 'Not detect removal region');
+    removalSqlStr = removalSqlStr.slice(0, removalStart) + removalSqlStr.slice(removalEnd);
+  }
+  return removalSqlStr;
+}
+
+function _removeFunctionSql(sqlStr, functionKeywords) {
+  return functionKeywords.reduce(
+    (acc, functionKeyword) => _removeFunctionKeyword(acc, functionKeyword),
+    sqlStr
+  );
+}
+
 function _removeUnparsableToken(ddlStr) {
   return Object.keys(config).reduce(
     (acc, unparsableType) => {
@@ -12,6 +55,7 @@ function _removeUnparsableToken(ddlStr) {
       if (_.isEmpty(values)) {
         return acc;
       }
+      /* eslint-disable no-case-declarations */
       switch(unparsableType) {
         case 'inter-token':
           const interTokenRegExp = new RegExp(`\\s+(${values.join('|')})\\s+`, 'gmi');
@@ -19,8 +63,8 @@ function _removeUnparsableToken(ddlStr) {
         case 'match-token':
           const matchTokenRegExp = new RegExp(`(${values.join('|')})`, 'gm');
           return acc.replace(matchTokenRegExp, '');
-        case 'statement':
-          return acc;
+        case 'function':
+          return _removeFunctionSql(acc, values);
         default:
           assert(false, `Not supported token type: ${unparsableType}`);
           break;
@@ -79,5 +123,5 @@ export default (sqlStr) =>
         return acc;
       }
     },
-    {},
+    {}
   );
