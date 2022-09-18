@@ -13,10 +13,12 @@ function _removeUnparsableToken(ddlStr) {
         return acc;
       }
       switch(unparsableType) {
-        case 'token':
-          const unparsableTokens = values.join('|');
-          const re = new RegExp(`\\s+(${unparsableTokens})\\b`, 'gmi');
-          return acc.replace(re, '');
+        case 'inter-token':
+          const interTokenRegExp = new RegExp(`\\s+(${values.join('|')})\\s+`, 'gmi');
+          return acc.replace(interTokenRegExp, ' ');
+        case 'match-token':
+          const matchTokenRegExp = new RegExp(`(${values.join('|')})`, 'gm');
+          return acc.replace(matchTokenRegExp, '');
         case 'statement':
           return acc;
         default:

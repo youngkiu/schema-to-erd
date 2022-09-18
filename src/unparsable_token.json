@@ -1,4 +1,5 @@
 {
-  "token": ["BINARY", "national", "type = innodb", "default 0000-00-00 00:00:00", "default 0000-00-00"],
+  "inter-token": ["BINARY", "national"],
+  "match-token": ["type = innodb", "default 0000-00-00 00:00:00", "default 0000-00-00"],
   "statement": ["GENERATED", "CHECK", "PARTITION"]
 }

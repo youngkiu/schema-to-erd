@@ -1,0 +1,3 @@
+[submodule "schema_samples/schema"]
+	path = schema_samples/schema
+	url = https://github.com/ronaldbradford/schema.git

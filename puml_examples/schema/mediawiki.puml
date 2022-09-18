@@ -8,6 +8,23 @@ hide stereotypes
 ' avoid problems with angled crows feet
 skinparam linetype ortho
 
+entity archive {
+  ar_namespace
+  ar_title
+  ar_text
+  ar_comment
+  ar_user
+  ar_user_text
+  ar_timestamp
+  ar_minor_edit
+  ar_flags
+  ar_rev_id
+  ar_text_id
+  ar_deleted
+  ar_len
+  ar_page_id
+  ar_parent_id
+}
 entity category {
   *cat_id
   cat_title
@@ -33,6 +50,29 @@ entity externallinks {
   el_from
   el_to
   el_index
+}
+entity filearchive {
+  *fa_id
+  fa_name
+  fa_archive_name
+  fa_storage_group
+  fa_storage_key
+  fa_deleted_user
+  fa_deleted_timestamp
+  fa_deleted_reason
+  fa_size
+  fa_width
+  fa_height
+  fa_metadata
+  fa_bits
+  fa_media_type
+  fa_major_mime
+  fa_minor_mime
+  fa_description
+  fa_user
+  fa_user_text
+  fa_timestamp
+  fa_deleted
 }
 entity hitcounter {
   hc_id
@@ -63,6 +103,25 @@ entity interwiki {
   iw_local
   iw_trans
 }
+entity ipblocks {
+  *ipb_id
+  ipb_address
+  ipb_user
+  ipb_by
+  ipb_by_text
+  ipb_reason
+  ipb_timestamp
+  ipb_auto
+  ipb_anon_only
+  ipb_create_account
+  ipb_enable_autoblock
+  ipb_expiry
+  ipb_range_start
+  ipb_range_end
+  ipb_deleted
+  ipb_block_email
+  ipb_allow_usertalk
+}
 entity job {
   *job_id
   job_cmd
@@ -75,6 +134,18 @@ entity langlinks {
   ll_lang
   ll_title
 }
+entity logging {
+  *log_id
+  log_type
+  log_action
+  log_timestamp
+  log_user
+  log_namespace
+  log_title
+  log_comment
+  log_params
+  log_deleted
+}
 entity math {
   math_inputhash
   math_outputhash
@@ -86,6 +157,37 @@ entity objectcache {
   *keyname
   value
   exptime
+}
+entity oldimage {
+  oi_name
+  oi_archive_name
+  oi_size
+  oi_width
+  oi_height
+  oi_bits
+  oi_description
+  oi_user
+  oi_user_text
+  oi_timestamp
+  oi_metadata
+  oi_media_type
+  oi_major_mime
+  oi_minor_mime
+  oi_deleted
+  oi_sha1
+}
+entity page {
+  *page_id
+  page_namespace
+  page_title
+  page_restrictions
+  page_counter
+  page_is_redirect
+  page_is_new
+  page_random
+  page_touched
+  page_latest
+  page_len
 }
 entity page_props {
   pp_page
@@ -106,11 +208,24 @@ entity pagelinks {
   pl_namespace
   pl_title
 }
+entity protected_titles {
+  pt_namespace
+  pt_title
+  pt_user
+  pt_reason
+  pt_timestamp
+  pt_expiry
+  pt_create_perm
+}
 entity querycache {
   qc_type
   qc_value
   qc_namespace
   qc_title
+}
+entity querycache_info {
+  qci_type
+  qci_timestamp
 }
 entity querycachetwo {
   qcc_type
@@ -152,6 +267,19 @@ entity redirect {
   *rd_from
   rd_namespace
   rd_title
+}
+entity revision {
+  *rev_id
+  rev_page
+  rev_text_id
+  rev_comment
+  rev_user
+  rev_user_text
+  rev_timestamp
+  rev_minor_edit
+  rev_deleted
+  rev_len
+  rev_parent_id
 }
 entity searchindex {
   si_page
@@ -201,9 +329,31 @@ entity transcache {
 entity updatelog {
   *ul_key
 }
+entity user {
+  *user_id
+  user_name
+  user_real_name
+  user_password
+  user_newpassword
+  user_newpass_time
+  user_email
+  user_options
+  user_touched
+  user_token
+  user_email_authenticated
+  user_email_token
+  user_email_token_expires
+  user_registration
+  user_editcount
+}
 entity user_groups {
   ug_user
   ug_group
+}
+entity user_newtalk {
+  user_id
+  user_ip
+  user_last_timestamp
 }
 entity valid_tag {
   *vt_tag
@@ -216,6 +366,6 @@ entity watchlist {
 }
 
 
-
+user_newtalk::user_id --> user::user_id
 
 @enduml
