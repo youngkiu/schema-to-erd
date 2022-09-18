@@ -1,5 +1,4 @@
 {
   "token": ["BINARY", "national", "type = innodb", "default 0000-00-00 00:00:00", "default 0000-00-00"],
-  "line": ["--"],
   "statement": ["GENERATED", "CHECK", "PARTITION"]
 }

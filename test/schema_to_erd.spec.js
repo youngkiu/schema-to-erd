@@ -17,6 +17,7 @@ const compareFiles = async (filePath1, filePath2) => {
   const isExistsFilePath1 = !!(await fs.stat(filePath1).catch((e) => false));
   const isExistsFilePath2 = !!(await fs.stat(filePath2).catch((e) => false));
   if (isExistsFilePath1 !== isExistsFilePath2) {
+    console.error(`Not exist file: ${isExistsFilePath1 ?? isExistsFilePath1}`)
     return false;
   }
 

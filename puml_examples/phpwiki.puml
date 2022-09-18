@@ -1,0 +1,84 @@
+@startuml
+
+' hide the spot
+hide circle
+hide methods
+hide stereotypes
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity page {
+  *id
+  pagename
+  hits
+  pagedata
+  cached_html
+}
+entity version {
+  *id
+  *version
+  mtime
+  minor_edit
+  content
+  versiondata
+}
+entity recent {
+  *id
+  latestversion
+  latestmajor
+  latestminor
+}
+entity nonempty {
+  *id
+}
+entity link {
+  linkfrom
+  linkto
+  relation
+}
+entity session {
+  *sess_id
+  sess_data
+  sess_date
+  sess_ip
+}
+entity pref {
+  *userid
+  prefs
+  passwd
+  groupname
+}
+entity member {
+  userid
+  groupname
+}
+entity rating {
+  *dimension
+  *raterpage
+  *rateepage
+  ratingvalue
+  rateeversion
+  tstamp
+}
+entity accesslog {
+  time_stamp
+  remote_host
+  remote_user
+  request_method
+  request_line
+  request_args
+  request_file
+  request_uri
+  request_time
+  status
+  bytes_sent
+  referer
+  agent
+  request_duration
+}
+
+
+
+
+@enduml

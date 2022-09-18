@@ -17,8 +17,6 @@ function _removeUnparsableToken(ddlStr) {
           const unparsableTokens = values.join('|');
           const re = new RegExp(`\\s+(${unparsableTokens})\\b`, 'gmi');
           return acc.replace(re, '');
-        case 'line':
-          return acc;
         case 'statement':
           return acc;
         default:
@@ -62,7 +60,8 @@ function _extractTableObj(jsonSchemaDocuments) {
 }
 
 export default (sqlStr) =>
-  _splitDdl(sqlStr).reduce(
+  // https://stackoverflow.com/a/21018155
+  _splitDdl(sqlStr.replace(/\/\*.*?\*\/|--.*?\n/gs, '')).reduce(
     (acc, sql) => {
       try {
         const options = { useRef: true };
