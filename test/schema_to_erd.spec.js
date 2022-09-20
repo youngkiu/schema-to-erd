@@ -1,4 +1,4 @@
-import schemaToErd from '../src/schema_to_erd.js';
+import { schemaToErd } from '../src/main.js';
 import { promises as fs } from 'fs';
 import path from 'path';
 import glob from 'glob';

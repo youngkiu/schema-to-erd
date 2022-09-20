@@ -449,10 +449,12 @@ customers_basket::customers_id --> customers::customers_id
 customers_basket::products_id --> products::products_id
 customers_basket_attributes::customers_id --> customers::customers_id
 customers_basket_attributes::products_id --> products::products_id
+customers_basket_attributes::products_options_id --> products_options::products_options_id
 orders::customers_id --> customers::customers_id
 orders_products::orders_id --> orders::orders_id
 orders_products::products_id --> products::products_id
 orders_status_history::orders_id --> orders::orders_id
+orders_status_history::orders_status_id --> orders_status::orders_status_id
 orders_products_attributes::orders_id --> orders::orders_id
 orders_products_attributes::orders_products_id --> orders_products::orders_products_id
 orders_products_download::orders_id --> orders::orders_id
@@ -461,6 +463,8 @@ orders_total::orders_id --> orders::orders_id
 products::manufacturers_id --> manufacturers::manufacturers_id
 products_attributes::products_id --> products::products_id
 products_images::products_id --> products::products_id
+products_options_values_to_products_options::products_options_id --> products_options::products_options_id
+products_options_values_to_products_options::products_options_values_id --> products_options_values::products_options_values_id
 reviews::products_id --> products::products_id
 reviews::customers_id --> customers::customers_id
 specials::products_id --> products::products_id

@@ -23,34 +23,29 @@ function _generateRelation(tableName, columnNames, primaryKeys, allPKs) {
 }
 
 export default function(tableColumns) {
-  const entities = Object.entries(tableColumns)
-    .reduce(
-      (acc, [tableName, { columnNames, primaryKeys }]) => (
-        acc + _generateEntity(tableName, columnNames, primaryKeys)
-      ),
-      '',
-    );
-  const allPKs = Object.entries(tableColumns)
-    .reduce(
-      (acc, [tableName, { primaryKeys }]) => {
-        if (primaryKeys.length !== 1) {
-          return acc;
-        }
-
-        const primaryKey = primaryKeys[0];
+  const entities = Object.entries(tableColumns).reduce(
+    (acc, [tableName, { columnNames, primaryKeys }]) => (
+      acc + _generateEntity(tableName, columnNames, primaryKeys)
+    ),
+    '',
+  );
+  const allPKs = Object.entries(tableColumns).reduce(
+    (accTable, [tableName, { primaryKeys }]) => primaryKeys.reduce(
+      (accPk, primaryKey) => {
         const primaryKeyName = primaryKey.startsWith(tableName) ? primaryKey : `${tableName}_${primaryKey}`;
         const foreignKey = { tableName, columnName: primaryKey };
-        return { ...acc, [primaryKeyName]: foreignKey };
+        return { ...accPk, [primaryKeyName]: foreignKey };
       },
-      {},
-    );
-  const relations = Object.entries(tableColumns)
-    .reduce(
-      (acc, [tableName, { columnNames, primaryKeys }]) => [
-        ...acc, ..._generateRelation(tableName, columnNames, primaryKeys, allPKs),
-      ],
-      [],
-    );
+      accTable,
+    ),
+    {},
+  );
+  const relations = Object.entries(tableColumns).reduce(
+    (acc, [tableName, { columnNames, primaryKeys }]) => [
+      ...acc, ..._generateRelation(tableName, columnNames, primaryKeys, allPKs),
+    ],
+    [],
+  );
 
   // https://plantuml.com/ko/ie-diagram
   return `@startuml

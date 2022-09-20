@@ -30,5 +30,13 @@ schemaToErd('./schema_samples/sakila-schema.sql');
 
 ![sakila-schema.puml](puml_examples/sakila-schema.png)
 
+## Source Codes
+
+### Clone
+```shell
+$ git clone https://github.com/youngkiu/schema-to-erd.git
+$ git submodule update --init --recursive
+```
+
 ### Contribute
 If an error occurs during use, please [open a new issue](https://github.com/youngkiu/schema-to-erd/issues) with the schema.sql file.
