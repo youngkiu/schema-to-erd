@@ -1,7 +1,7 @@
 import { Parser } from 'sql-ddl-to-json-schema';
 import assert from 'assert';
 import _ from 'lodash';
-import config from './unparsable_token.json' assert { type: 'json' };
+import config from './unparsable.config.js';
 
 const parser = new Parser('mysql');
 
