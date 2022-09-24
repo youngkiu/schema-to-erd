@@ -81,8 +81,11 @@ function _splitDdl(sqlStr) {
     if (start === -1) {
       break;
     }
-    const end = restSqlStr.indexOf(';', start) + 1;
-    const ddlStr = restSqlStr.substring(start, end);
+    const end = restSqlStr.indexOf(';', start);
+    if (end === -1) {
+      throw `Not found semicolon(;). Error - ${restSqlStr}`;
+    }
+    const ddlStr = restSqlStr.substring(start, end + 1);
     ddls.push(_removeUnparsableToken(ddlStr).replace(/,[\n\r\s]+\)/gm, '\n)'));
     offset += end;
   }
@@ -101,9 +104,14 @@ function _extractTableObj(jsonSchemaDocuments) {
   };
 }
 
+const _removeSqlComments = (sqlStr) =>
+  sqlStr
+    .replace(/alter\s+table\s+(.*)\s+comment\s+['"](.*?)['"]/gi, '') // https://stackoverflow.com/a/6441056
+    .replace(/COMMENT\s+['"](.*?)['"]/gi, '') // https://stackoverflow.com/a/171483
+    .replace(/\/\*.*?\*\/|--.*?\n/gs, ''); // https://stackoverflow.com/a/21018155
+
 export default (sqlStr) =>
-  // https://stackoverflow.com/a/21018155
-  _splitDdl(sqlStr.replace(/\/\*.*?\*\/|--.*?\n/gs, '')).reduce(
+  _splitDdl(_removeSqlComments(sqlStr)).reduce(
     (acc, sql) => {
       try {
         const options = { useRef: true };
@@ -115,7 +123,7 @@ export default (sqlStr) =>
         const { tableName, columnNames, primaryKeys } = _extractTableObj(jsonSchemaDocuments[0]);
         return { ...acc, [tableName]: { columnNames, primaryKeys } };
       } catch (err) {
-        console.error(`Can not parse "${sql}"`, err);
+        console.error(`Can not parse "${sql}"`);
         return acc;
       }
     },
