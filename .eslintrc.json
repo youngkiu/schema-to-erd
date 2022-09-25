@@ -4,7 +4,7 @@
         "es2021": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": "airbnb",
     "overrides": [
     ],
     "parserOptions": {
@@ -12,5 +12,12 @@
         "sourceType": "module"
     },
     "rules": {
+        "import/prefer-default-export": "off",
+        "import/extensions": [
+            "off"
+        ],
+        "no-console": [
+            "error", { "allow": ["warn", "error"] }
+        ]
     }
 }

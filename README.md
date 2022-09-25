@@ -2,6 +2,9 @@
 [![Node.js CI](https://github.com/youngkiu/schema-to-erd/actions/workflows/node.js.yml/badge.svg)](https://github.com/youngkiu/schema-to-erd/actions/workflows/node.js.yml)
 [![Node.js Package](https://github.com/youngkiu/schema-to-erd/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/youngkiu/schema-to-erd/actions/workflows/npm-publish.yml)
 
+[![npm version](https://badge.fury.io/js/schema-to-erd.svg)](https://badge.fury.io/js/schema-to-erd)
+[![NPM downloads](http://img.shields.io/npm/dm/schema-to-erd.svg?style=flat-square)](http://www.npmtrends.com/schema-to-erd)
+
 # schema-to-erd
 Generate ERD UML file from Schema DDL file
 
@@ -21,7 +24,7 @@ const { schemaToErd } = require('schema-to-erd');
 schemaToErd('./schema_samples/sakila-schema.sql');
 ```
 
-### Sample Schema file
+### Sample Schema files
 
 1. [Sakila Sample Database](https://dev.mysql.com/doc/index-other.html)
 2. [Employees Sample Database](https://dev.mysql.com/doc/employee/en/) - https://github.com/datacharmer/test_db

@@ -1,5 +1,4 @@
-
-function _generateEntity(tableName, columnNames, primaryKeys) {
+function generateEntity(tableName, columnNames, primaryKeys) {
   const columnNamesWithPk = columnNames.map((columnName) => (primaryKeys.includes(columnName) ? `*${columnName}` : columnName));
   const columnsStr = columnNamesWithPk.join('\n  ');
   return `entity ${tableName} {
@@ -8,7 +7,7 @@ function _generateEntity(tableName, columnNames, primaryKeys) {
 `;
 }
 
-function _generateRelation(tableName, columnNames, primaryKeys, allPKs) {
+function generateRelation(tableName, columnNames, primaryKeys, allPKs) {
   const allPkNames = Object.keys(allPKs);
   return columnNames.reduce(
     (acc, columnName) => {
@@ -22,10 +21,10 @@ function _generateRelation(tableName, columnNames, primaryKeys, allPKs) {
   );
 }
 
-export default function(tableColumns) {
+export default function generatePlantUml(tableColumns) {
   const entities = Object.entries(tableColumns).reduce(
     (acc, [tableName, { columnNames, primaryKeys }]) => (
-      acc + _generateEntity(tableName, columnNames, primaryKeys)
+      acc + generateEntity(tableName, columnNames, primaryKeys)
     ),
     '',
   );
@@ -42,7 +41,7 @@ export default function(tableColumns) {
   );
   const relations = Object.entries(tableColumns).reduce(
     (acc, [tableName, { columnNames, primaryKeys }]) => [
-      ...acc, ..._generateRelation(tableName, columnNames, primaryKeys, allPKs),
+      ...acc, ...generateRelation(tableName, columnNames, primaryKeys, allPKs),
     ],
     [],
   );
