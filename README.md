@@ -11,7 +11,7 @@ Generate ERD UML file from Schema DDL file
 ## Installation
 
 ```sh
-npm i schema-to-erd
+$ npm i schema-to-erd
 ```
 
 ## Usage
@@ -22,6 +22,10 @@ import { schemaToErd } from 'schema-to-erd';
 const { schemaToErd } = require('schema-to-erd');
 
 schemaToErd('./schema_samples/sakila-schema.sql');
+```
+
+```shell
+$ schema2erd -s ./schema_samples/sakila-schema.sql
 ```
 
 ### Sample Schema files
