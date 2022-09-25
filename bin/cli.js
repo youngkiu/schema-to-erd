@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import { schemaToErd } from '../dist/main.mjs';
 import fs from 'fs';
+import plantumlEncoder from 'plantuml-encoder';
+import { schemaToErd } from '../dist/main.mjs';
 
 program
   .requiredOption('-s, --schema-file <sql file path>', 'schema.sql file path')
@@ -16,6 +17,7 @@ if (!(fs.existsSync(options.schemaFile))) {
 }
 
 (async () => {
-  const pumlFilePath = await schemaToErd(options.schemaFile, options.outputDir);
-  console.info(`Generate the plantuml file of ${pumlFilePath}`);
+  const { pumlStr } = await schemaToErd(options.schemaFile, options.outputDir);
+  const encoded = plantumlEncoder.encode(pumlStr);
+  console.info(`Look at the ERD image - http://www.plantuml.com/plantuml/img/${encoded}`);
 })();

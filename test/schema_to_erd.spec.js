@@ -36,7 +36,7 @@ console.log(fileList);
 describe('samples',  () => {
   fileList.map((filePath) => {
     it(path.parse(filePath).base, async () => {
-      const pumlFilePath = await schemaToErd(filePath);
+      const { pumlFilePath } = await schemaToErd(filePath);
       const { dir, base } = path.parse(pumlFilePath);
       const pathParts = dir.split(path.sep);
       const expectedFilePath = path.join('./puml_examples', ...pathParts.slice(1), base);
