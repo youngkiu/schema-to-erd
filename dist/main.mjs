@@ -63,7 +63,7 @@ ${E.join(`
 `)}
 
 @enduml
-`}async function ia(s,t){let o=await go.readFile(s,"utf8"),E=oa(o),T=vo(E),c=t||Mo.parse(s).dir,O=Mo.join(c,`${Mo.parse(s).name}.puml`);return await go.mkdir(c,{recursive:!0}),await go.writeFile(O,T,"utf8"),{pumlFilePath:O,pumlStr:T}}export{ia as schemaToErd};
+`}async function ia(s,t){let o=await go.readFile(s,"utf8"),E=oa(o),T=vo(E),c=t||Mo.parse(s).dir,O=Mo.join(c,`${Mo.parse(s).name}.puml`);return c&&await go.mkdir(c,{recursive:!0}),await go.writeFile(O,T,"utf8"),{pumlFilePath:O,pumlStr:T}}export{ia as schemaToErd};
 /**
  * @license
  * Lodash <https://lodash.com/>

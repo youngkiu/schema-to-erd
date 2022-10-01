@@ -63,7 +63,7 @@ ${E.join(`
 `)}
 
 @enduml
-`}async function wo(s,t){let o=await zr.promises.readFile(s,"utf8"),E=Ea(o),T=Uo(E),c=t||Zr.default.parse(s).dir,O=Zr.default.join(c,`${Zr.default.parse(s).name}.puml`);return await zr.promises.mkdir(c,{recursive:!0}),await zr.promises.writeFile(O,T,"utf8"),{pumlFilePath:O,pumlStr:T}}0&&(module.exports={schemaToErd});
+`}async function wo(s,t){let o=await zr.promises.readFile(s,"utf8"),E=Ea(o),T=Uo(E),c=t||Zr.default.parse(s).dir,O=Zr.default.join(c,`${Zr.default.parse(s).name}.puml`);return c&&await zr.promises.mkdir(c,{recursive:!0}),await zr.promises.writeFile(O,T,"utf8"),{pumlFilePath:O,pumlStr:T}}0&&(module.exports={schemaToErd});
 /**
  * @license
  * Lodash <https://lodash.com/>

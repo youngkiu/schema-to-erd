@@ -11,7 +11,9 @@ export default async function schemaToErd(schemaFilePath, outputDirPath) {
 
   const pumlDirPath = outputDirPath || path.parse(schemaFilePath).dir;
   const pumlFilePath = path.join(pumlDirPath, `${path.parse(schemaFilePath).name}.puml`);
-  await fs.mkdir(pumlDirPath, { recursive: true });
+  if (pumlDirPath) {
+    await fs.mkdir(pumlDirPath, { recursive: true });
+  }
   await fs.writeFile(pumlFilePath, pumlStr, 'utf8');
 
   return { pumlFilePath, pumlStr };
