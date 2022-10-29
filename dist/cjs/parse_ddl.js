@@ -61,9 +61,7 @@ function removeUnparsableToken(ddlStr) {
             (0, assert_1.default)(false, 'This can never be reached.');
             return acc;
         }
-        else {
-            return acc;
-        }
+        return acc;
     }, ddlStr);
 }
 function splitDdl(sqlStr) {
@@ -127,7 +125,6 @@ exports.default = (sqlStr) => splitDdl(removeSqlComments(sqlStr))
     }
     catch (err) {
         throw Error(`Can not parse "${sql}"`);
-        return acc;
     }
 }, {});
 //# sourceMappingURL=parse_ddl.js.map

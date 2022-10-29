@@ -1,10 +1,18 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { PathLike } from 'node:fs';
 import parseDdl, { parseDdlType } from './parse_ddl';
 import generatePlantUml from './plantuml_table';
-import { PathLike } from "node:fs";
 
-export default async function schemaToErd(schemaFilePath: PathLike, outputDirPath?: PathLike) {
+export type pumlOutputType = {
+  pumlFilePath: string;
+  pumlStr: string;
+};
+
+export default async function schemaToErd(
+  schemaFilePath: PathLike,
+  outputDirPath?: PathLike,
+): Promise<pumlOutputType> {
   const sqlStr = await fs.readFile(schemaFilePath, 'utf8');
 
   const tableColumns: parseDdlType = parseDdl(sqlStr);

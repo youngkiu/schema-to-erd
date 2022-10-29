@@ -1,7 +1,7 @@
 import { Parser } from 'sql-ddl-to-json-schema';
 import assert from 'assert';
-import config from './unparsable.config';
 import { JSONSchema7 } from 'json-schema';
+import config from './unparsable.config';
 
 const parser = new Parser('mysql');
 
@@ -65,9 +65,8 @@ function removeUnparsableToken(ddlStr: string): string {
         }
         assert(false, 'This can never be reached.');
         return acc;
-      } else {
-        return acc;
       }
+      return acc;
     },
     ddlStr,
   );
@@ -94,9 +93,13 @@ function splitDdl(sqlStr: string): string[] {
   return ddls;
 }
 
-function extractTableObj(jsonSchemaDocuments: JSONSchema7):
-  { primaryKeys: string[]; columnNames: string[]; tableName: string } | undefined
-{
+function extractTableObj(
+  jsonSchemaDocuments: JSONSchema7,
+): {
+  primaryKeys: string[];
+  columnNames: string[];
+  tableName: string
+} | undefined {
   const { title: tableName, definitions } = jsonSchemaDocuments;
   if (tableName === undefined || definitions === undefined) {
     return undefined;
@@ -109,8 +112,8 @@ function extractTableObj(jsonSchemaDocuments: JSONSchema7):
           return acc;
         }
         return (val.$comment === 'primary key' ? [...acc, key] : acc);
-      }
-      , []
+      },
+      [],
     );
 
   return {
@@ -132,27 +135,25 @@ export type parseDdlType = {
   }
 };
 
-export default (sqlStr: string): parseDdlType =>
-  splitDdl(removeSqlComments(sqlStr))
-    .reduce(
-      (acc, sql) => {
-        try {
-          const options = { useRef: true };
-          const jsonSchemaDocuments = parser.feed(sql).toJsonSchemaArray(options);
-          if (jsonSchemaDocuments.length === 0) {
-            return acc;
-          }
-          assert(jsonSchemaDocuments.length === 1, 'Parse only one DDL at a time.');
-          const tableObj = extractTableObj(jsonSchemaDocuments[0]);
-          if (tableObj === undefined) {
-            return acc;
-          }
-          const { tableName, columnNames, primaryKeys } = tableObj;
-          return { ...acc, [tableName]: { columnNames, primaryKeys } };
-        } catch (err) {
-          throw Error(`Can not parse "${sql}"`);
+export default (sqlStr: string): parseDdlType => splitDdl(removeSqlComments(sqlStr))
+  .reduce(
+    (acc, sql) => {
+      try {
+        const options = { useRef: true };
+        const jsonSchemaDocuments = parser.feed(sql).toJsonSchemaArray(options);
+        if (jsonSchemaDocuments.length === 0) {
           return acc;
         }
-      },
-      {},
-    );
+        assert(jsonSchemaDocuments.length === 1, 'Parse only one DDL at a time.');
+        const tableObj = extractTableObj(jsonSchemaDocuments[0]);
+        if (tableObj === undefined) {
+          return acc;
+        }
+        const { tableName, columnNames, primaryKeys } = tableObj;
+        return { ...acc, [tableName]: { columnNames, primaryKeys } };
+      } catch (err) {
+        throw Error(`Can not parse "${sql}"`);
+      }
+    },
+    {},
+  );

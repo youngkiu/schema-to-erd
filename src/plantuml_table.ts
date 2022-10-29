@@ -1,7 +1,13 @@
-import { parseDdlType } from "./parse_ddl";
+import { parseDdlType } from './parse_ddl';
 
-function generateEntity(tableName: string, columnNames: string[], primaryKeys: string[]): string {
-  const columnNamesWithPk = columnNames.map((columnName) => (primaryKeys.includes(columnName) ? `*${columnName}` : columnName));
+function generateEntity(
+  tableName: string,
+  columnNames: string[],
+  primaryKeys: string[],
+): string {
+  const columnNamesWithPk = columnNames.map(
+    (columnName) => (primaryKeys.includes(columnName) ? `*${columnName}` : columnName),
+  );
   const columnsStr = columnNamesWithPk.join('\n  ');
   return `entity ${tableName} {
   ${columnsStr}
@@ -16,7 +22,12 @@ type pkObjType = {
   }
 };
 
-function generateRelation(tableName: string, columnNames: string[], primaryKeys: string[], allPKs: pkObjType): string[] {
+function generateRelation(
+  tableName: string,
+  columnNames: string[],
+  primaryKeys: string[],
+  allPKs: pkObjType,
+): string[] {
   const allPkNames = Object.keys(allPKs);
   return columnNames.reduce<string[]>(
     (acc, columnName) => {
@@ -30,7 +41,7 @@ function generateRelation(tableName: string, columnNames: string[], primaryKeys:
   );
 }
 
-export default function generatePlantUml(tableColumns: parseDdlType) {
+export default function generatePlantUml(tableColumns: parseDdlType): string {
   const entities: string = Object.entries(tableColumns).reduce(
     (acc, [tableName, { columnNames, primaryKeys }]) => (
       acc + generateEntity(tableName, columnNames, primaryKeys)
