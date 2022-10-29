@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/youngkiu/schema-to-erd#readme",
   "dependencies": {
+    "commander": "^9.4.1",
     "json-schema": "^0.4.0",
     "plantuml-encoder": "^1.4.0",
     "sql-ddl-to-json-schema": "^4.0.6"
@@ -47,7 +48,6 @@
     "@types/node": "^18.11.3",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
-    "commander": "^9.4.1",
     "eslint": "^8.26.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
