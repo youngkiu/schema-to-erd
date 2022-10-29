@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import { program } from 'commander';
-import fs from 'fs';
-import plantumlEncoder from 'plantuml-encoder';
-import { schemaToErd } from '../dist/main.mjs';
+const { program } = require('commander');
+const fs = require('fs');
+const plantumlEncoder = require('plantuml-encoder');
+const { schemaToErd } = require('../dist/cjs/index');
 
 program
   .requiredOption('-s, --schema-file <sql file path>', 'schema.sql file path')

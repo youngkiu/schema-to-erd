@@ -8,7 +8,9 @@ puml_examples
 schema_samples
 src
 test
-.eslintrc.json
+.eslintrc
+.eslintignore
 .gitignore
 .npmignore
 build.js
+dist/**/*.map

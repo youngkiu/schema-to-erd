@@ -1,17 +1,17 @@
-import { schemaToErd } from '../src/main.js';
+/* package.json
+ * {
+ *   "type": "module",
+ *   "scripts": {
+ *     "test": "mocha --timeout 10000 --experimental-specifier-resolution=node"
+ *   }
+ * }
+ */
+
+import { schemaToErd } from '../dist/esm/index';
 import { promises as fs } from 'fs';
 import path from 'path';
 import glob from 'glob';
 import assert from 'assert';
-
-const getSqlFiles = (pattern, options) => {
-  return new Promise((resolve, reject) => {
-    glob(pattern, options, (err, data) => {
-      if (err) return reject(err)
-      resolve(data)
-    })
-  })
-}
 
 const compareFiles = async (filePath1, filePath2) => {
   const isExistsFilePath1 = !!(await fs.stat(filePath1).catch((e) => false));
@@ -30,10 +30,10 @@ const compareFiles = async (filePath1, filePath2) => {
   return isEqual;
 };
 
-const fileList = await getSqlFiles('schema_samples/**/*.sql');
+const fileList = glob.sync('schema_samples/**/*.sql');
 console.log(fileList);
 
-describe('samples',  () => {
+describe('samples', () => {
   fileList.map((filePath) => {
     it(path.parse(filePath).base, async () => {
       const { pumlFilePath } = await schemaToErd(filePath);

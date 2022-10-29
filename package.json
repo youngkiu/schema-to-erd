@@ -1,14 +1,18 @@
 {
   "name": "schema-to-erd",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "description": "Generate ERD UML file from Schema DDL file",
-  "type": "module",
-  "main": "dist/main.cjs",
-  "module": "dist/main.mjs",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "mocha --timeout 10000",
-    "lint": "eslint src",
-    "build": "node build.js",
+    "lint": "eslint . --ext .ts",
+    "test": "mocha --timeout 10000 test/**/*.cjs",
+    "build": "rm -rf dist/ && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "release": "npm publish --access public"
   },
   "repository": {
@@ -32,21 +36,28 @@
   },
   "homepage": "https://github.com/youngkiu/schema-to-erd#readme",
   "dependencies": {
-    "commander": "^9.4.0",
-    "glob": "^8.0.3",
-    "lodash": "^4.17.21",
     "plantuml-encoder": "^1.4.0",
     "sql-ddl-to-json-schema": "^4.0.6"
   },
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
-    "esbuild": "^0.15.7",
-    "eslint": "^8.24.0",
-    "eslint-config-airbnb": "^19.0.4",
+    "@types/glob": "^8.0.0",
+    "@types/jest": "^29.2.0",
+    "@types/json-schema": "^7.0.11",
+    "@types/lodash": "^4.14.186",
+    "@types/node": "^18.11.3",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "commander": "^9.4.1",
+    "eslint": "^8.26.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "mocha": "^10.0.0"
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
   }
 }

@@ -47,3 +47,9 @@ $ git submodule update --init --recursive
 
 ### Contribute
 If an error occurs during use, please [open a new issue](https://github.com/youngkiu/schema-to-erd/issues) with the schema.sql file.
+
+### Reference for package
+
+- https://youtu.be/ZINPuzq62lE
+- https://youtu.be/V_5ImTOmMh0
+- https://github.com/joeythelantern/Component-Library

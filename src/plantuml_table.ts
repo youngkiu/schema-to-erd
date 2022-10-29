@@ -1,4 +1,6 @@
-function generateEntity(tableName, columnNames, primaryKeys) {
+import { parseDdlType } from "./parse_ddl";
+
+function generateEntity(tableName: string, columnNames: string[], primaryKeys: string[]): string {
   const columnNamesWithPk = columnNames.map((columnName) => (primaryKeys.includes(columnName) ? `*${columnName}` : columnName));
   const columnsStr = columnNamesWithPk.join('\n  ');
   return `entity ${tableName} {
@@ -7,9 +9,16 @@ function generateEntity(tableName, columnNames, primaryKeys) {
 `;
 }
 
-function generateRelation(tableName, columnNames, primaryKeys, allPKs) {
+type pkObjType = {
+  [primaryKeyName: string]: {
+    [tableName: string]: string,
+    columnName: string,
+  }
+};
+
+function generateRelation(tableName: string, columnNames: string[], primaryKeys: string[], allPKs: pkObjType): string[] {
   const allPkNames = Object.keys(allPKs);
-  return columnNames.reduce(
+  return columnNames.reduce<string[]>(
     (acc, columnName) => {
       if (!primaryKeys.includes(columnName) && allPkNames.includes(columnName)) {
         const foreignKey = allPKs[columnName];
@@ -21,14 +30,14 @@ function generateRelation(tableName, columnNames, primaryKeys, allPKs) {
   );
 }
 
-export default function generatePlantUml(tableColumns) {
-  const entities = Object.entries(tableColumns).reduce(
+export default function generatePlantUml(tableColumns: parseDdlType) {
+  const entities: string = Object.entries(tableColumns).reduce(
     (acc, [tableName, { columnNames, primaryKeys }]) => (
       acc + generateEntity(tableName, columnNames, primaryKeys)
     ),
     '',
   );
-  const allPKs = Object.entries(tableColumns).reduce(
+  const allPKs: pkObjType = Object.entries(tableColumns).reduce(
     (accTable, [tableName, { primaryKeys }]) => primaryKeys.reduce(
       (accPk, primaryKey) => {
         const primaryKeyName = primaryKey.startsWith(tableName) ? primaryKey : `${tableName}_${primaryKey}`;
@@ -39,7 +48,7 @@ export default function generatePlantUml(tableColumns) {
     ),
     {},
   );
-  const relations = Object.entries(tableColumns).reduce(
+  const relations: string[] = Object.entries(tableColumns).reduce<string[]>(
     (acc, [tableName, { columnNames, primaryKeys }]) => [
       ...acc, ...generateRelation(tableName, columnNames, primaryKeys, allPKs),
     ],
