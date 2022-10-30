@@ -6,7 +6,8 @@ node_modules
 output
 puml_examples
 schema_samples
-src
+src/**/*.ts
+src/**/!*.d.ts
 test
 .eslintrc
 .eslintignore
