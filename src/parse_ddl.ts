@@ -2,6 +2,7 @@ import { Parser } from 'sql-ddl-to-json-schema';
 import assert from 'assert';
 import { JSONSchema7 } from 'json-schema';
 import config from './unparsable.config';
+import { parseDdlType } from './index.d';
 
 const parser = new Parser('mysql');
 
@@ -127,13 +128,6 @@ const removeSqlComments = (sqlStr: string): string => sqlStr
   .replace(/alter\s+table\s+(.*)\s+comment\s+['"](.*?)['"]/gi, '') // https://stackoverflow.com/a/6441056
   .replace(/COMMENT\s+['"](.*?)['"]/gi, '') // https://stackoverflow.com/a/171483
   .replace(/\/\*.*?\*\/|--.*?\n/gs, ''); // https://stackoverflow.com/a/21018155
-
-export type parseDdlType = {
-  [tableName: string]: {
-    columnNames: string[],
-    primaryKeys: string[],
-  }
-};
 
 export default (sqlStr: string): parseDdlType => splitDdl(removeSqlComments(sqlStr))
   .reduce(

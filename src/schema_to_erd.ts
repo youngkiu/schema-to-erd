@@ -1,13 +1,9 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { PathLike } from 'node:fs';
-import parseDdl, { parseDdlType } from './parse_ddl';
+import parseDdl from './parse_ddl';
 import generatePlantUml from './plantuml_table';
-
-export type pumlOutputType = {
-  pumlFilePath: string;
-  pumlStr: string;
-};
+import { parseDdlType, pumlOutputType } from './index.d';
 
 export default async function schemaToErd(
   schemaFilePath: PathLike,
