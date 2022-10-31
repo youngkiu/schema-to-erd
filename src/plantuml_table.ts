@@ -1,4 +1,4 @@
-import { parseDdlType } from './index.d';
+import { parseDdlType } from './types';
 
 function generateEntity(
   tableName: string,

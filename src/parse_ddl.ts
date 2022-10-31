@@ -2,7 +2,7 @@ import { Parser } from 'sql-ddl-to-json-schema';
 import assert from 'assert';
 import { JSONSchema7 } from 'json-schema';
 import config from './unparsable.config';
-import { parseDdlType } from './index.d';
+import { parseDdlType } from './types';
 
 const parser = new Parser('mysql');
 

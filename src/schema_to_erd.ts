@@ -3,7 +3,7 @@ import path from 'path';
 import { PathLike } from 'node:fs';
 import parseDdl from './parse_ddl';
 import generatePlantUml from './plantuml_table';
-import { parseDdlType, pumlOutputType } from './index.d';
+import { parseDdlType, pumlOutputType } from './types';
 
 export default async function schemaToErd(
   schemaFilePath: PathLike,
