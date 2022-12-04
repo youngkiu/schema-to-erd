@@ -26,6 +26,8 @@ schemaToErd('./schema_samples/sakila-schema.sql');
 
 ```shell
 $ schema2erd -s ./schema_samples/sakila-schema.sql
+// or:
+$ npx schema-to-erd -s ./schema_samples/sakila-schema.sql
 ```
 
 ### Sample Schema files
